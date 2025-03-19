@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(/assets/img/hero-bg.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .modal-content {
+            background-color: rgba(85, 85, 85, 0.9);
+            color: #f7f7f7;
+        }
+        .form-container h3 {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+        .form-group {
+            margin-bottom: 1.5em;
+        }
+        .form-control {
+            background-color: #666;
+            color: #f7f7f7;
+        }
+        .form-control::placeholder {
+            color: #ccc;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+        .text-danger {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+<header id="header" class="header fixed-top">
+
+    <div class="topbar d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+359 888 88 88 88</span></i>
+            </div>
+        </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h1 class="sitename">ресторант Вистоди</h1>
+            </a>
+<!--            <div class="ms-auto d-flex gap-2">-->
+<!--                <a th:href="@{/login}" class="cta-btn">Влез/</a>-->
+<!--                <a th:href="@{/register}" class="cta-btn">Регистрирай се</a>-->
+<!--            </div>-->
+            <nav id="navmenu" class="navmenu">
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+        </div>
+
+    </div>
+
+</header>
+
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal fade" id="registerModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Регистрация</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form th:action="@{/userEdit}" th:method="POST" th:object="${userEditRequest}">
+                        <div class="form-group">
+                            <label for="username">Потребителско име</label>
+                            <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Парола</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Phone" th:field="*{phone}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Електронна поща</label>
+                            <input type="email" class="form-control" id="email" placeholder="email" th:field="*{email}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Адрес</label>
+                            <input type="text" class="form-control" id="address" placeholder="address" th:field="*{address}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Регистрация</button>
+                        <p class="text-center mt-3">Вече имате акаунт? <a href="/login">Влезте</a>!</p>
+                        <p class="text-center mt-3">Или преминете към <a href="/home">Началната страница</a>!</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#registerModal').modal('show');
+    });
+</script>
+
+</body>
+</html>
