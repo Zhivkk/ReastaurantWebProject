@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -47,52 +47,67 @@
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">ресторант Вистоди</h1>
+                <a th:href="@{/home#menu}" class="cta-btn">Назад към менюто</a>
             </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
+        </div>
+    </div>
+</header>
+
+
+<main class="main">
+    <!-- Book A Table Section -->
+
+    <section id="book-a-table" class="book-a-table section">
+        <div style="height: 50px;"></div> <!-- добавя празен ред -->
+        <div style="height: 50px;"></div>
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Отзиви</h2>
+            <p>Препоръки</p>
+        </div><!-- End Section Title -->
+
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <form th:action="@{/messages}" th:method="POST" th:object="${messageRequest}">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6">
+
+                        <input  th:field="*{name}" type="text" name="userName" class="form-control" id="name" placeholder="Your Name" readonly style=" color: blue; border: 1px solid #555;">
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <input  th:field="*{email}" type="email" class="form-control" name="Email" id="email" placeholder="Your Email" readonly style=" color: blue; border: 1px solid #555;">
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <input  th:field="*{subject}"  type="text" class="form-control" name="subject" id="subject"  placeholder="Subject" style=" color: blue; border: 1px solid #555;">
+                    </div>
+<!--                    <div class="col-lg-4 col-md-6">-->
+<!--                        <input type="text" name="text" th:field="*{message}" class="form-control" id="text" placeholder="Напишете вашия отзив" required="" style="background-color: #333; color: #fff; border: 1px solid #555;" >-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-6">-->
+<!--                        <input type="number"  th:field="*{guests}" class="form-control" name="guests" id="guests" placeholder="Брой гости" required="" style="background-color: #333; color: #fff; border: 1px solid #555;">-->
+<!--                    </div>-->
+                </div>
+
+                <div class="form-group mt-3">
+                    <textarea th:field="*{message}" class="form-control" name="message" rows="5" placeholder="Съобщение" style=" color: blue; border: 1px solid #555;"></textarea>
+                </div>
+
+                <div class="text-center mt-3">
+                   <button type="submit" class="btn btn-primary">Запази</button>
+                </div>
+            </form>
+            <!-- End Reservation Form -->
 
         </div>
 
-    </div>
-
-</header>
-
-<main class="main">
-
-        <div class="col-lg-8">
-            <br> <br>
-            <br> <br>
-            <br> <br>
-            <br> <br>
-            <br> <br>
-            <form th:action="@{/messages}" th:method="POST" th:object="${messageRequest}" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                <div class="row gy-4">
-
-                    <div class="col-md-6">
-                        <input th:field="*{name}" type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                    </div>
-
-                    <div class="col-md-6 ">
-                        <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                    </div>
-
-                    <div class="col-md-12">
-                        <input th:field="*{subject}" type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                    </div>
-
-                    <div class="col-md-12">
-                        <textarea th:field="*{message}" class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                    </div>
-
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Изпрати</button>
-                    </div>
-
-                </div>
-            </form>
-        </div><!-- End Contact Form -->
+    </section><!-- /Book A Table Section -->
 
 </main>
 

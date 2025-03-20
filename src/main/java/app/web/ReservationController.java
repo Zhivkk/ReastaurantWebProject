@@ -31,7 +31,7 @@ class ReservationController {
         reservationRequest.setUserPhone(user.getPhone());
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("book-table");
+        modelAndView.setViewName("messages");
         modelAndView.addObject("reservationRequest", reservationRequest);
         modelAndView.addObject("user", user);
         return modelAndView;

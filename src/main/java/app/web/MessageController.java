@@ -38,9 +38,9 @@ public class MessageController {
     }
 
     @PostMapping("/messages")
-    public String MessagesP(@AuthenticationPrincipal UserInfo userInfo, MessageRequest messageRequest) {
+    public String MessagesP( MessageRequest messageRequest) {
 
-        messageService.addMessage (userInfo, messageRequest);
+        messageService.addMessage ( messageRequest);
 
         return "redirect:/home";
     }

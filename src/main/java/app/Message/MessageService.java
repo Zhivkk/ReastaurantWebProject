@@ -19,10 +19,10 @@ public class MessageService {
         this.userRepository = userRepository;
     }
 
-    public void addMessage(UserInfo userInfo, MessageRequest messageRequest) {
+    public void addMessage(MessageRequest messageRequest) {
 
         Message message = Message.builder()
-                .user(userRepository.findById(userInfo.getUserId()).orElse(null))
+                .user(userRepository.findByUsername(messageRequest.getName()).orElse(null))
                 .subject(messageRequest.getSubject())
                 .messageText(messageRequest.getMessage())
                 .messageStatus(MessageStaus.WRITEN)
