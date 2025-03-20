@@ -2,29 +2,32 @@ package app.web.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.URL;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class UserEditRequest {
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserEditRequest { //DTO - Получава информацията от HTML формата
 
-    @Size(max = 20, message = "First name can't have more than 20 symbols")
-    private String firstName;
-
-    @Size(max = 20, message = "Last name can't have more than 20 symbols")
-    private String lastName;
-
-    @Email(message = "Requires correct email format")
-    private String email;
-
-    @URL(message = "Requires correct web link format")
-    private String profilePicture;
+    @Size(min = 6, message = "Username must be at least 6 symbols")
+    private String username;
 
     @Size(min = 10, max = 10, message = "The phone number must be 10 digits long")
     private String phone;
 
+    @Email(message = "Requires correct email format")
+    private String email;
+
     private String address;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String profilePicture;
 
 }

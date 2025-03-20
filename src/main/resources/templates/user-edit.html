@@ -77,7 +77,7 @@
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">ресторант Вистоди</h1>
@@ -104,23 +104,26 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Регистрация</h4>
+                    <h4 class="modal-title">Промяна на личните Ви данни</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal Body -->
                 <div class="modal-body">
+
                     <form th:action="@{/userEdit}" th:method="POST" th:object="${userEditRequest}">
                         <div class="form-group">
-                            <label for="username">Потребителско име</label>
+                            <label for="username">Име не акаунта</label>
                             <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" required>
                             <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Парола</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-                        </div>
+
+                        <!-- TODO  name readonly -->
+<!--                        <div class="form-group">-->
+<!--                            <label for="password">Парола</label>-->
+<!--                            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>-->
+<!--                            <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label for="phone">Телефон</label>
@@ -139,9 +142,16 @@
                             <input type="text" class="form-control" id="address" placeholder="address" th:field="*{address}" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Регистрация</button>
-                        <p class="text-center mt-3">Вече имате акаунт? <a href="/login">Влезте</a>!</p>
-                        <p class="text-center mt-3">Или преминете към <a href="/home">Началната страница</a>!</p>
+                        <div class="form-group">
+                            <label for="firstName">Малко име</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="firstName" th:field="*{firstName}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Фамилно име</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="lastName" th:field="*{lastName}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Промени</button>
                     </form>
                 </div>
             </div>

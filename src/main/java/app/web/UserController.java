@@ -10,8 +10,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.UUID;
 
 
 @Controller
@@ -23,24 +26,29 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/userEdit")
-//    public ModelAndView getRegisterPage() {
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("userEdit");
-//        modelAndView.addObject("userEditRequest", new UserEditRequest());
-//
-//        return modelAndView;
-//    }
+    @GetMapping("/users/{id}/edit")
+
+    public ModelAndView getRegisterPage(@PathVariable UUID id) {
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        User user = userService.getById(id);
+
+        modelAndView.setViewName("user-edit");
+        modelAndView.addObject("userEditRequest",userService.mapUserToUserEditRequest(user));
+        return modelAndView;
+    }
 
     @PostMapping("/userEdit")
-    public ModelAndView registerNewUser(@Valid RegisterRequest registerRequest, BindingResult bindingResult) {
+    public ModelAndView registerNewUser(@AuthenticationPrincipal UserInfo userInfo,  @Valid  UserEditRequest userEditRequest, BindingResult bindingResult) {
+
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("register");
+            return new ModelAndView("user-edit");
         }
-        userService.register(registerRequest);
 
-        return new ModelAndView("redirect:/login");
+        userService.editUserDetails(userInfo.getUserId(),userEditRequest);
+
+        return new ModelAndView("redirect:/home");
     }
 }

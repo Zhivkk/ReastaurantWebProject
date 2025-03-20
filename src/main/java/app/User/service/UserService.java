@@ -87,6 +87,7 @@ public class UserService implements UserDetailsService {
     public UserEditRequest mapUserToUserEditRequest(User user) {
 
         return UserEditRequest.builder()
+                .username( user.getUsername())
                 .lastName(user.getLastName())
                 .firstName(user.getFirstName())
                 .email(user.getEmail())
