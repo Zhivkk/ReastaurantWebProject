@@ -37,9 +37,13 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        loadIngredients();
-        loadProducts();
-        loadProductIngredients();
+       if (ingredientRepository.count() < 1) {
+
+           loadIngredients();
+           loadProducts();
+           loadProductIngredients();
+
+       }
     }
 
     private void loadIngredients() throws Exception {
