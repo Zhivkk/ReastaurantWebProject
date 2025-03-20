@@ -59,7 +59,7 @@ public class DataSaver {
     //Записва данните в JSON файловете на GitHub
     public void commitAndPushToGitHub() throws IOException, InterruptedException {
         String repoUrl = "https://github.com/Zhivkk/RestaurantWebProjectResources.git";
-//        String githubToken = "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"; // Пази го сигурно, можеш да го сложиш в application.properties
+        String githubToken = "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"; // Пази го сигурно, можеш да го сложиш в application.properties
         String commitMessage = "Auto-update JSON files";
 
         // Записваме bash скрипт за commit и push

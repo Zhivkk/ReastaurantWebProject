@@ -46,12 +46,10 @@
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index" class="logo d-flex align-items-center me-auto me-xl-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
+            <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
                 <h1 class="sitename">ресторант Вистоди</h1>
                 <div class="ms-auto d-flex gap-2">
-                    <a th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Обратно към Меню</a>
+                    <a th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Обратно към Меню</a>-->
                 </div>
             </a>
             <nav id="navmenu" class="navmenu">
@@ -72,6 +70,9 @@
 
             <div class="row gy-4">
                 <div class="col-lg-6 order-1 order-lg-2">
+                    <br> <br>
+                    <br> <br>
+                    <br> <br>
                     <img th:src ="${product.getPicture()}" class="img-fluid about-img" alt="">
                 </div>
                 <div class="col-lg-6 order-2 order-lg-1 content">

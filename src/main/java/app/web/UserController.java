@@ -23,15 +23,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/userEdit")
-    public ModelAndView getRegisterPage() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userEdit");
-        modelAndView.addObject("userEditRequest", new UserEditRequest());
-
-        return modelAndView;
-    }
+//    @GetMapping("/userEdit")
+//    public ModelAndView getRegisterPage() {
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("userEdit");
+//        modelAndView.addObject("userEditRequest", new UserEditRequest());
+//
+//        return modelAndView;
+//    }
 
     @PostMapping("/userEdit")
     public ModelAndView registerNewUser(@Valid RegisterRequest registerRequest, BindingResult bindingResult) {
