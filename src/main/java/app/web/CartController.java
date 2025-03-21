@@ -1,6 +1,7 @@
 package app.web;
 
 import app.Cart.Cart;
+import app.Cart.CartRepository;
 import app.Errand.ErrandService;
 import app.Security.UserInfo;
 import app.User.model.User;
@@ -22,10 +23,12 @@ public class CartController {
 
     private final ErrandService errandService;
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
 
-    public CartController(ErrandService errandService, UserRepository userRepository) {
+    public CartController(ErrandService errandService, UserRepository userRepository, CartRepository cartRepository) {
         this.errandService = errandService;
         this.userRepository = userRepository;
+        this.cartRepository = cartRepository;
     }
 
     @GetMapping("/cart")
@@ -58,6 +61,25 @@ public class CartController {
 
     }
 
+    @GetMapping("/chefCart/{id}")
+    public ModelAndView getChefsCartPage(@PathVariable UUID id) {
 
+        List<Cart> carts = errandService.getCartsByErrandId(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("chef-cart");
+        modelAndView.addObject("carts", carts);
+
+        return modelAndView;
+
+    }
+
+    @PostMapping("/chefCart/{id}/finish")
+    public String finishedChefsCart(@PathVariable UUID id) {
+
+        errandService.checkStatus(id);
+
+        return "redirect:/chefCart/{id}";
+    }
 
 }

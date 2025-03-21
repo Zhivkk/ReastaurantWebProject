@@ -124,7 +124,36 @@ public class ErrandService {
 
         Errand errand = errandRepository.findByUserAndErrandStatus(user, ErrandStatus.PREPARATION).stream().findFirst().orElse(null);
         errand.setErrandStatus(ErrandStatus.FOR_EXECUTION);
+        errand.setPrice(totalPrice);
         errandRepository.save(errand);
 
+    }
+
+    public List<Errand> getAllErrandsForChefs() {
+
+        return errandRepository.findByErrandStatus( ErrandStatus.FOR_EXECUTION);
+
+    }
+
+    public List<Cart> getCartsByErrandId(UUID id) {
+
+        Errand errand = errandRepository.findById(id).orElse(null);
+        List<Cart> carts = errand.getCarts();
+        return carts;
+
+    }
+
+    public void checkStatus(UUID id) {
+        Cart cart = cartRepository.findById(id).orElse(null);
+        cart.setIsReady(true);
+        cartRepository.save(cart);
+
+        Errand errand = cart.getErrand();
+        List <Cart> carts = errand.getCarts().stream().filter(c -> !c.getIsReady()).toList();
+        Boolean isAllReady = carts.isEmpty();
+        if (isAllReady) {
+            errand.setErrandStatus(ErrandStatus.FOR_DELIVERY);
+            errandRepository.save(errand);
+        }
     }
 }

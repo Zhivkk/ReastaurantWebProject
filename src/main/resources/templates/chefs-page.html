@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml" xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -46,65 +46,51 @@
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
-            <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a>
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">ресторант Вистоди</h1>
-                <div th:if="${user.role.name()=='CLIENT'}" class="ms-auto d-flex gap-2">
-                    <a  th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Обратно към Меню</a>-->
-                </div>
+                <a th:href="@{/chef}" class="cta-btn">Опресни</a>
             </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-
         </div>
-
     </div>
-
-
 </header>
-
 <main class="main">
     <section id="about" class="about section">
+        <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+                <div class="row">
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color)">Храна за приготвяне</h4>
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Поръчка</label>
+                        </div>
+                        <h1 style="margin-bottom: 20px"></h1>
+                    </div>
+                    <h1></h1>
+                    <div th:each ="errand : ${errands}" class="row" >
+                        <br><br>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="menu-content" style="font-size: 18px;"><a th:text="${errand.getId()}"></a></div>
+                        </div>
+                        <div class="col-lg-1 col-md-6">
+                            <a th:href="@{'/chefCart/' +${errand.getId()}}" class="cta-btn">Запази маса</a>
+                        </div>
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="row gy-4">
-                <div class="col-lg-6 order-1 order-lg-2">
-                    <br> <br>
-                    <br> <br>
-                    <br> <br>
-                    <img th:src ="${product.getPicture()}" class="img-fluid about-img" alt="">
-                </div>
-                <div class="col-lg-6 order-2 order-lg-1 content">
-                    <h3 th:text = "${product.getProductName()}"  style="margin-top: 5em;"></h3>
-                    <p th:if="${user.role.name()=='CLIENT'}" th:text = "${product.getDescription()}" class="fst-italic"></p>
-                    <ul>
-
-                        <li><span>Съставки:</span><i th:text = "${ingredients}" class="fst-italic"></i></li>
-                        <li th:if="${user.role.name()=='CLIENT'}"><span>Грамаж: </span><i th:text="${product.getGrammage() + ' гр. '}" class="fst-italic"></i></li>
-                        <li th:if="${user.role.name()=='CLIENT'}"><span>Цена: </span><i th:text="${product.getPrice() + ' лв. '}" class="fst-italic"></i></li>
-
-                    </ul>
-                    <h5 th:if="${user.role.name()=='CHEF' or user.role.name() == 'BARTENDER'}">Начин на приготвяне</h5>
-                    <p th:if="${user.role.name()=='CHEF' or user.role.name() == 'BARTENDER'}" th:text = "${product.getPreparation()}" class="fst-italic"></p>
+                    </div>
 
                 </div>
             </div>
-
-            <form th:action="@{'/addToCart/' + ${product.getId()}}" th:method="POST" th:object="${addCartRequest}">
-
-                <div th:if="${user.role.name()=='CLIENT'}" class="form-group">
-                    <label for="quantity">количество:</label>
-                    <input type="tel" class="form-check-inline" id="quantity" placeholder="quantity" th:field="*{quantity}" required >
-                </div>
-
-                <button th:if="${user.role.name()=='CLIENT'}" type="submit" class="btn btn-primary" style="display: block; margin: 0 ;">Добави В количката</button>
-            </form>
-
         </div>
-
-    </section><!-- /About Section -->
-
+    </section>
 </main>
 
 <!-- Scroll Top -->

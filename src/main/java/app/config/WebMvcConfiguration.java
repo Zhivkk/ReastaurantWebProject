@@ -43,13 +43,13 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
                             // Пренасочване въз основа на ролята
                             if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                                response.sendRedirect("/users/admin");
+                                response.sendRedirect("/admin");
                             } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_CHEF"))) {
-                                response.sendRedirect("/cart/chef");
+                                response.sendRedirect("/chef");
                             } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_BARTENDER"))) {
-                                    response.sendRedirect("/cart/bartender");
+                                    response.sendRedirect("/bartender");
                             } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_SUPPLIER"))) {
-                                response.sendRedirect("/errand/delivery");
+                                response.sendRedirect("/delivery");
                             } else {
                                 response.sendRedirect("/home");
                             }
