@@ -7,8 +7,12 @@ import app.User.service.UserService;
 import app.web.dto.AddCartRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
+import java.math.BigDecimal;
 
 @Controller
 public class ErrandController {
@@ -30,5 +34,16 @@ public class ErrandController {
 
         return "redirect:/cart";
     }
+
+    @GetMapping("/finish")
+    public String finishingTheErrandFromTheClientSite(@AuthenticationPrincipal UserInfo UserInfo) {
+
+        User user = userService.getById(UserInfo.getUserId());
+
+        errandService.finishErrandFromUserSide(user.getId());
+
+        return "redirect:/home";
+    }
+
 
 }

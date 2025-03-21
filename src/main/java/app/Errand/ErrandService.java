@@ -113,4 +113,18 @@ public class ErrandService {
         return totalPrice;
 
     }
+
+    public void finishErrandFromUserSide(UUID id) {
+
+        BigDecimal totalPrice = getTotalPrice(id);
+
+        User user = userRepository.findById(id).orElse(null);
+        user.setAccountAmount(user.getAccountAmount().subtract(totalPrice));
+        userRepository.save(user);
+
+        Errand errand = errandRepository.findByUserAndErrandStatus(user, ErrandStatus.PREPARATION).stream().findFirst().orElse(null);
+        errand.setErrandStatus(ErrandStatus.FOR_EXECUTION);
+        errandRepository.save(errand);
+
+    }
 }

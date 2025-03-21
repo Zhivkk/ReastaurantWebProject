@@ -54,7 +54,7 @@
 
             <div class="ms-auto d-flex gap-2">
                 <a style="color: gold" th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Продължете с поръчката</a>
-                <a style="color: gold" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/cart/finish}" class="cta-btn">Поръчай</a>
+                <a style="color: gold" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/finish}" class="cta-btn">Поръчай</a>
                 <a style="color: gold" th:href="@{/home#menu}" class="cta-btn">Откажи</a>
             </div>
             <nav id="navmenu" class="navmenu">
