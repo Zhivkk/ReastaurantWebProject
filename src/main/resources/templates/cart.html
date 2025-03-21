@@ -46,7 +46,7 @@
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">ресторант Вистоди</h1>
@@ -54,8 +54,8 @@
 
             <div class="ms-auto d-flex gap-2">
                 <a style="color: gold" th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Продължете с поръчката</a>
-<!--                <a style="color: gold" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/cart/finish}" class="cta-btn">Поръчай</a>-->
-                <a style="color: gold" th:href="@{/}" class="cta-btn">Откажи</a>
+                <a style="color: gold" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/cart/finish}" class="cta-btn">Поръчай</a>
+                <a style="color: gold" th:href="@{/home#menu}" class="cta-btn">Откажи</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -124,7 +124,18 @@
         </div>
 
     </section><!-- /About Section -->
-
+    <div class="container text-start mt-4">
+        <h4>Информация за поръчката</h4>
+        <h5 style="color: var(--accent-color)" th:text="'Обща цена:   ' + ${totalPrice} + ' лв.'"></h5>
+        <h5 style="color: var(--accent-color)" th:text="'Налична сума:   ' + ${user.getAccountAmount()} + ' лв.'"></h5>
+        <h4 style="color: red" th:if="${totalPrice > user.getAccountAmount()}">Недостатъчна наличност</h4>
+    </div>
+    <div class="container text-start mt-4">
+        <h4>Информация за доставката</h4>
+        <h5 style="color: var(--accent-color)" th:text="'Телефон за контакт:   ' + ${user.getPhone()}"></h5>
+        <h5 style="color: var(--accent-color)" th:text="'Адрес за доставка:   ' + ${user.getAddress()}"></h5>
+    </div>
+</main>
 </main>
 
 <!-- Scroll Top -->

@@ -27,12 +27,14 @@ public class ProductController {
 
         Product product = productService.getById(id);
         String ingredients = productService.getProductIngredients(id);
+        AddCartRequest addCartRequest = new AddCartRequest();
 
+        addCartRequest.setQuantity(1);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", product);
         modelAndView.setViewName("product-details");
-        modelAndView.addObject("addCartRequest", new AddCartRequest());
+        modelAndView.addObject("addCartRequest", addCartRequest);
 
         modelAndView.addObject("ingredients", ingredients);
 
