@@ -77,9 +77,11 @@ public class CartController {
     @PostMapping("/chefCart/{id}/finish")
     public String finishedChefsCart(@PathVariable UUID id) {
 
+        String errandID = errandService.getErrandId(id);
+
         errandService.checkStatus(id);
 
-        return "redirect:/chefCart/{id}";
+        return "redirect:/chefCart/" + errandID;
     }
 
     @GetMapping("/bartenderCart/{id}")

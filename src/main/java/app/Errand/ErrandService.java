@@ -132,16 +132,22 @@ public class ErrandService {
 
     public List<Errand> getAllErrandsForChefs() {
 
-        return errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION).stream()
-                .filter(errand -> errand.getCarts().stream()
-                        .anyMatch(cart -> {
-                            if (cart.getProduct() != null && cart.getProduct().getProductCategory() != null) {
-                                String category = String.valueOf(cart.getProduct().getProductCategory());
-                                return category.equals("SOUP") || category.equals("SALLAD") || category.equals("APPETIZER") || category.equals("MAIN_COURSE") || category.equals("DESSERT") || category.equals("OTHER") || category.equals("SPECIALS");
-                            }
-                            return false;
-                        }))
-                .toList();
+        List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION);
+        List<Errand> errandsFiltered = new ArrayList<>();
+        Boolean isReadyForAdd = false;
+
+        for (Errand errand : errands) {
+            List<Cart> carts = errand.getCarts();
+            for (Cart cart : carts) {
+                if (cart.getIsReady().equals(false) && !cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL) || !cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)) {
+                    isReadyForAdd = true;
+                }
+            }
+            if (isReadyForAdd) {errandsFiltered.add(errand);}
+
+            isReadyForAdd = false;
+        }
+        return errandsFiltered;
 
     }
 
