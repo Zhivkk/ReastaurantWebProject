@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -231,5 +232,21 @@ public class ErrandService {
         Cart cart = cartRepository.findById(id).orElse(null);
 
         return cart.getErrand().getId().toString();
+    }
+
+    public List<Errand> getAllErrandsForDeliverry() {
+
+        List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_DELIVERY);
+
+        return errands;
+    }
+
+    public void finishDeliverryStatus(UUID id) {
+
+        Errand errand = errandRepository.findById(id).orElse(null);
+
+        errand.setErrandStatus(ErrandStatus.DELIVERED);
+        errandRepository.save(errand);
+
     }
 }
