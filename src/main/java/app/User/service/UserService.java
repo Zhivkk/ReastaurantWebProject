@@ -118,10 +118,10 @@ public class UserService implements UserDetailsService {
     public UserEditRequestAdmin mapUserToUserEditRequestAdmin(User user) {
 
         return UserEditRequestAdmin.builder()
+                .id(user.getId())
                 .lastName(user.getLastName())
                 .firstName(user.getFirstName())
                 .email(user.getEmail())
-                .profilePicture(user.getProfilePicture())
                 .address(user.getAddress())
                 .phone(user.getPhone())
                 .accountAmount(user.getAccountAmount())
@@ -129,13 +129,13 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 
-    public void editUserDetailsAdmin(UUID userId, UserEditRequestAdmin userEditRequestAdmin) {
-        User user = getById(userId);
+    public void editUserDetailsAdmin(UserEditRequestAdmin userEditRequestAdmin) {
+
+        User user = getById(userEditRequestAdmin.getId());
 
         user.setFirstName(userEditRequestAdmin.getFirstName());
         user.setLastName(userEditRequestAdmin.getLastName());
         user.setEmail(userEditRequestAdmin.getEmail());
-        user.setProfilePicture(userEditRequestAdmin.getProfilePicture());
         user.setAddress(userEditRequestAdmin.getAddress());
         user.setPhone(userEditRequestAdmin.getPhone());
         user.setUpdatedOn(LocalDateTime.now());

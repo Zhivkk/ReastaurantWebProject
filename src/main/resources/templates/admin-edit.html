@@ -65,19 +65,10 @@
 <body>
 <header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center">
-        <div class="container d-flex justify-content-center justify-content-md-between">
-            <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+359 888 88 88 88</span></i>
-            </div>
-        </div>
-    </div><!-- End Top Bar -->
-
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">ресторант Вистоди</h1>
@@ -104,29 +95,56 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Вписване</h4>
+                    <h4 class="modal-title">Промяна на личните данни на клиент</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <form th:action="@{/login}" th:method="POST" th:object="${loginRequest}">
+
+                    <form th:action="@{/userEditAdmin" th:method="POST" th:object="${userEditRequestAdmin}">
                         <div class="form-group">
-                            <label for="username">Потребителско име</label>
-                            <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-                        </div>
+                            <input type="hidden" name="id" value="${id}" />
                         <div class="form-group">
-                            <label for="password">Парола</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                            <label for="phone">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Phone" th:field="*{phone}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Влезте</button>
-                        <p class="text-center mt-3">Още нямате акаунт? <a href="/register">Регистрираайте се</a>!</p>
-                        <p class="text-center mt-3">Или преминете към <a href="/home">Началната страница</a>!</p>
+                        <div class="form-group">
+                            <label for="email">Електронна поща</label>
+                            <input type="email" class="form-control" id="email" placeholder="email" th:field="*{email}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Адрес</label>
+                            <input type="text" class="form-control" id="address" placeholder="address" th:field="*{address}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstName">Малко име</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="firstName" th:field="*{firstName}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Фамилно име</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="lastName" th:field="*{lastName}" required>
+                        </div>
+                            <div class="form-group">
+                                <label for="accountAmount">Сметка</label>
+                                <input type="text" class="form-control" id="accountAmount" placeholder="accountAmount" th:field="*{accountAmount}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Роля</label>
+                                <select class="form-control" id="role" th:field="*{role}" required>
+                                    <option value="" disabled selected>Изберете роля</option>
+                                    <option th:each="role : ${T(app.User.model.UserRole).values()}" th:value="${role}"
+                                            th:text="${role}"></option>
+                                </select>
+                            </div>
+
+                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Промени</button>
                     </form>
-
                 </div>
             </div>
         </div>
