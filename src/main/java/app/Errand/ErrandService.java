@@ -3,16 +3,17 @@ package app.Errand;
 
 import app.Cart.Cart;
 import app.Cart.CartRepository;
+import app.Product.ProductCategory;
 import app.Product.ProductRepository;
 import app.Security.UserInfo;
 import app.User.model.User;
 import app.User.repository.UserRepository;
 import app.web.dto.AddCartRequest;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -144,10 +145,16 @@ public class ErrandService {
 
     }
 
-    public List<Cart> getCartsByErrandId(UUID id) {
+    public List<Cart> getCartsByErrandIdForChef(UUID id) {
 
         Errand errand = errandRepository.findById(id).orElse(null);
-        List<Cart> carts = errand.getCarts();
+
+        List<Cart> carts = errand.getCarts().stream()
+                .filter(cart -> !cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
+                        && !cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)
+                        && cart.getIsReady().equals(false))
+                .toList();
+
         return carts;
 
     }
@@ -167,15 +174,56 @@ public class ErrandService {
     }
 
     public List<Errand> getAllErrandsForBartender() {
-        return errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION).stream()
-                .filter(errand -> errand.getCarts().stream()
-                        .anyMatch(cart -> {
-                            if (cart.getProduct() != null && cart.getProduct().getProductCategory() != null) {
-                                String category = String.valueOf(cart.getProduct().getProductCategory());
-                                return category.equals("SOFT_DRINK") || category.equals("ALCOHOL");
-                            }
-                            return false;
-                        }))
+        List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION);
+        List<Errand> errandsFiltered = new ArrayList<>();
+        Boolean isReadyForAdd = false;
+
+        for (Errand errand : errands) {
+            List<Cart> carts = errand.getCarts();
+            for (Cart cart : carts) {
+                if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)) {
+                    isReadyForAdd = true;
+                }
+            }
+            if (isReadyForAdd) {errandsFiltered.add(errand);}
+
+            isReadyForAdd = false;
+        }
+        return errandsFiltered;
+
+
+
+//        List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION).stream()
+//                .filter(errand -> errand.getCarts().stream()
+//                        .anyMatch(cart -> cart.getIsReady().equals(false)))
+//                .filter(errand -> errand.getCarts().stream()
+//                        .anyMatch(cart -> cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
+//                                    || cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)))
+//                .toList();
+//
+
+    }
+
+    public List<Cart> getCartsByErrandIdForBartender(UUID id) {
+
+        Errand errand = errandRepository.findById(id).orElse(null);
+
+        List<Cart> carts = errand.getCarts().stream()
+                .filter(cart -> cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
+                        || cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK))
+                .filter(cart -> !cart.getIsReady().equals(true))
                 .toList();
+
+        return carts;
+
+    }
+
+    public String getErrandId(UUID id) {
+
+        Cart cart = cartRepository.findById(id).orElse(null);
+
+        return cart.getErrand().getId().toString();
     }
 }
