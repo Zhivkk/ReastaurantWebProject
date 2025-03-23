@@ -131,7 +131,16 @@ public class ErrandService {
 
     public List<Errand> getAllErrandsForChefs() {
 
-        return errandRepository.findByErrandStatus( ErrandStatus.FOR_EXECUTION);
+        return errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION).stream()
+                .filter(errand -> errand.getCarts().stream()
+                        .anyMatch(cart -> {
+                            if (cart.getProduct() != null && cart.getProduct().getProductCategory() != null) {
+                                String category = String.valueOf(cart.getProduct().getProductCategory());
+                                return category.equals("SOUP") || category.equals("SALLAD") || category.equals("APPETIZER") || category.equals("MAIN_COURSE") || category.equals("DESSERT") || category.equals("OTHER") || category.equals("SPECIALS");
+                            }
+                            return false;
+                        }))
+                .toList();
 
     }
 
@@ -155,5 +164,18 @@ public class ErrandService {
             errand.setErrandStatus(ErrandStatus.FOR_DELIVERY);
             errandRepository.save(errand);
         }
+    }
+
+    public List<Errand> getAllErrandsForBartender() {
+        return errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION).stream()
+                .filter(errand -> errand.getCarts().stream()
+                        .anyMatch(cart -> {
+                            if (cart.getProduct() != null && cart.getProduct().getProductCategory() != null) {
+                                String category = String.valueOf(cart.getProduct().getProductCategory());
+                                return category.equals("SOFT_DRINK") || category.equals("ALCOHOL");
+                            }
+                            return false;
+                        }))
+                .toList();
     }
 }

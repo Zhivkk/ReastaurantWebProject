@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml" xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -37,70 +37,56 @@
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
-            <a  class="logo d-flex align-items-center me-auto me-xl-0">
+            <a>
                 <h1 class="sitename">ресторант Вистоди</h1>
+                <a th:href="@{/bartender}" class="cta-btn">Опресни</a>
             </a>
-
-            <div class="ms-auto d-flex gap-2">
-                <a style="color: gold" th:href="@{/chef}" class="cta-btn">Назад</a>
-            </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-
         </div>
-
     </div>
-
 </header>
-
 <main class="main">
     <section id="about" class="about section">
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-
+        <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
-                <h1></h1>
-                <h1></h1>
-                <h1></h1>
-                <h4 style="font-size: 25px; margin-bottom: 20px">Вашата количка</h4>
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Проудкт</label>
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color)">Храна за приготвяне</h4>
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Поръчки:</label>
+                        </div>
+                        <h1 style="margin-bottom: 20px"></h1>
                     </div>
-                    <div class="col-lg-1 col-md-6">
-                        <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Количество</label>
+                    <h1></h1>
+                    <div th:each ="errand : ${errands}" class="row" >
+                        <br><br>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="menu-content" style="font-size: 18px;"><a th:text="${errand.getId()}"></a></div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 d-flex align-items-center">
+                            <form action="#" method="get"
+                                  style="display: inline-block; text-align: center; width: 100%;">
+                                <button type="submit" th:formaction="@{'/bartenderCart/' + ${errand.getId()}}"
+                                        class="cta-btn"
+                                        style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                                    Виж поръчка
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
-                    <div class="col-lg-1 col-md-6">
-                        <label style="font-size: 18px; text-align: center">Действие</label>
-                    </div>
-                    <h1 style="margin-bottom: 20px"></h1>
+
                 </div>
-                <h1></h1>
-                <div th:each ="cart : ${carts}" class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <a th:href="@{'/products/' + ${cart.getProduct().getId()} + '/product-details'}" th:text="${cart.product.getProductName()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px; margin-bottom: 20px;"></a>
-                    </div>
-                    <div class="col-lg-1 col-md-6">
-                        <h5 th:text="${cart.getQuantity()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px; text-align: center"></h5>
-                    </div>
-                    <div class="col-lg-1 col-md-6">
-                        <form th:action="@{'/chefCart/' + ${cart.getId()} + '/finish'}" th:method="post" method="post" style="display: inline;">
-                            <input type="hidden" name="_method" value="POST"/>
-                            <button type="submit" class="btn btn-danger">Завършено</button>
-                        </form>
-                    </div>
-
-
-                </div>
-
             </div>
-
         </div>
-
-    </section><!-- /About Section -->
-
-</main>
+    </section>
 </main>
 
 <!-- Scroll Top -->

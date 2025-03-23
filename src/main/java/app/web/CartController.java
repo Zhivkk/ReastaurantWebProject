@@ -82,4 +82,24 @@ public class CartController {
         return "redirect:/chefCart/{id}";
     }
 
+    @GetMapping("/bartenderCart/{id}")
+    public ModelAndView getBartenderCartPage(@PathVariable UUID id) {
+
+        List<Cart> carts = errandService.getCartsByErrandId(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("bartender-cart");
+        modelAndView.addObject("carts", carts);
+
+        return modelAndView;
+
+    }
+
+    @PostMapping("/bartenderCart/{id}/finish")
+    public String finishedBartendersCart(@PathVariable UUID id) {
+
+        errandService.checkStatus(id);
+
+        return "redirect:/bartenderCart/{id}";
+    }
 }

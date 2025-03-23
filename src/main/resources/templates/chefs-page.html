@@ -33,22 +33,11 @@
 
 <header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center">
-        <div class="container d-flex justify-content-center justify-content-md-between">
-            <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+359 888 88 88 88</span></i>
-            </div>
-        </div>
-    </div><!-- End Top Bar -->
-
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a>
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">ресторант Вистоди</h1>
                 <a th:href="@{/chef}" class="cta-btn">Опресни</a>
             </a>
@@ -81,8 +70,15 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="menu-content" style="font-size: 18px;"><a th:text="${errand.getId()}"></a></div>
                         </div>
-                        <div class="col-lg-1 col-md-6">
-                            <a th:href="@{'/chefCart/' +${errand.getId()}}" class="cta-btn">Запази маса</a>
+                        <div class="col-lg-1 col-md-6 d-flex align-items-center">
+                            <form action="#" method="get"
+                                  style="display: inline-block; text-align: center; width: 100%;">
+                                <button type="submit" th:formaction="@{'/chefCart/' + ${errand.getId()}}"
+                                        class="cta-btn"
+                                        style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                                    Виж поръчка
+                                </button>
+                            </form>
                         </div>
 
                     </div>

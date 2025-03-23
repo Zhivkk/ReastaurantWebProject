@@ -56,5 +56,16 @@ public class ErrandController {
         return modelAndView;
     }
 
+    @GetMapping("/bartender")
+    public ModelAndView getBartenderPage(@AuthenticationPrincipal UserInfo userInfo) {
+
+        List<Errand> errands= errandService.getAllErrandsForBartender();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("bartender-page");
+        modelAndView.addObject("errands",errands);
+
+        return modelAndView;
+    }
 
 }

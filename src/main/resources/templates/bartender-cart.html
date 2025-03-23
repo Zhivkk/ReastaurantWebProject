@@ -42,7 +42,7 @@
             </a>
 
             <div class="ms-auto d-flex gap-2">
-                <a style="color: gold" th:href="@{/chef}" class="cta-btn">Назад</a>
+                <a style="color: gold" th:href="@{/bartender}" class="cta-btn">Назад</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -63,10 +63,10 @@
                 <h1></h1>
                 <h1></h1>
                 <h1></h1>
-                <h4 style="font-size: 25px; margin-bottom: 20px">Вашата количка</h4>
+                <h4 style="font-size: 25px; margin-bottom: 20px">Поръчка на клиента:</h4>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Проудкт</label>
+                        <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Продукт</label>
                     </div>
                     <div class="col-lg-1 col-md-6">
                         <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Количество</label>
@@ -85,7 +85,7 @@
                         <h5 th:text="${cart.getQuantity()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px; text-align: center"></h5>
                     </div>
                     <div class="col-lg-1 col-md-6">
-                        <form th:action="@{'/chefCart/' + ${cart.getId()} + '/finish'}" th:method="post" method="post" style="display: inline;">
+                        <form th:action="@{'/bartenderCart/' + ${cart.getId()} + '/finish'}" th:method="post" method="post" style="display: inline;">
                             <input type="hidden" name="_method" value="POST"/>
                             <button type="submit" class="btn btn-danger">Завършено</button>
                         </form>
