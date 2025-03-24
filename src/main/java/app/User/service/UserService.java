@@ -1,6 +1,7 @@
 package app.User.service;
 
 import app.APIMessage.MailClient;
+import app.APIMessage.MailRequest;
 import app.Security.UserInfo;
 import app.exception.DomainException;
 import app.User.model.User;
@@ -66,13 +67,13 @@ public class UserService implements UserDetailsService {
                 userRepository.save(user);
         log.info("Successfully create new user account for username [%s] and id [%s]".formatted(user.getUsername(), user.getId()));
 
-//        //Изпращане на имейл за успешна регистрация
-//        MailRequest mailRequest = MailRequest.builder()
-//                .recipient(user.getEmail())
-//                .subject("Account activation")
-//                .body("Здравейте! Вие успешно се регистрирахте на сайта на ресторант Вистоди")
-//                .build();
-//        mailClient.sendMail(mailRequest);
+        //Изпращане на имейл за успешна регистрация
+        MailRequest mailRequest = MailRequest.builder()
+                .recipient(user.getEmail())
+                .subject("Account activation")
+                .body("Здравейте! Вие успешно се регистрирахте на сайта на ресторант Вистоди")
+                .build();
+        mailClient.sendMail(mailRequest);
 
         return user;
     }

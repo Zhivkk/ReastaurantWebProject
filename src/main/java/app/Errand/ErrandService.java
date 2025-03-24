@@ -1,6 +1,8 @@
 package app.Errand;
 
 
+import app.APIMessage.MailClient;
+import app.APIMessage.MailRequest;
 import app.Cart.Cart;
 import app.Cart.CartRepository;
 import app.Product.ProductCategory;
@@ -9,6 +11,7 @@ import app.Security.UserInfo;
 import app.User.model.User;
 import app.User.repository.UserRepository;
 import app.web.dto.AddCartRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,12 +28,14 @@ public class ErrandService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final MailClient mailClient;
 
-    public ErrandService(ErrandRepository errandRepository, CartRepository cartRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public ErrandService(ErrandRepository errandRepository, CartRepository cartRepository, ProductRepository productRepository, UserRepository userRepository, MailClient mailClient) {
         this.errandRepository = errandRepository;
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.mailClient = mailClient;
     }
 
     public void addCartToErrand(User user, AddCartRequest addCartRequest, Long id) {
@@ -116,6 +121,7 @@ public class ErrandService {
 
     }
 
+    @Transactional
     public void finishErrandFromUserSide(UUID id) {
 
         BigDecimal totalPrice = getTotalPrice(id);
@@ -128,6 +134,13 @@ public class ErrandService {
         errand.setErrandStatus(ErrandStatus.FOR_EXECUTION);
         errand.setPrice(totalPrice);
         errandRepository.save(errand);
+
+//        MailRequest mailRequest = MailRequest.builder()
+//                .recipient(user.getEmail())
+//                .subject("Order Placed")
+//                .body("Здравейте! Вие успешно регистрирахте поръчка в ресторант Вистоди")
+//                .build();
+//        mailClient.sendMail(mailRequest);
 
     }
 
