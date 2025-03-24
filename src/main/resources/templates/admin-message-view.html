@@ -95,59 +95,36 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Промяна на личните данни на клиент</h4>
+                    <h4 class="modal-title">Съобщение от клиента</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
+
+
 
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                    <form th:action="@{/userEditAdmin}" th:method="PUT" th:object="${userEditRequestAdmin}">
+                    <form th:object="${message}">
                         <div class="form-group">
                             <div class="form-group">
-                                <label for="id">ID</label>
-                                <input type="text" class="form-control" id="id" placeholder="id" th:field="*{id}" required>
-                                <p class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
+                                <label for="user">ID</label>
+                                <input type="text" class="form-control" id="user" placeholder="user" th:field="*{user}" >
                             </div>
-                        <div class="form-group">
-                            <label for="phone">Телефон</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="Phone" th:field="*{phone}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Електронна поща</label>
-                            <input type="email" class="form-control" id="email" placeholder="email" th:field="*{email}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Адрес</label>
-                            <input type="text" class="form-control" id="address" placeholder="address" th:field="*{address}" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="firstName">Малко име</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="firstName" th:field="*{firstName}" >
                         </div>
                         <div class="form-group">
-                            <label for="lastName">Фамилно име</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="lastName" th:field="*{lastName}" >
+                            <label for="subject">Тема</label>
+                            <input type="text" class="form-control" id="subject" placeholder="subject" th:field="*{subject}" >
                         </div>
-                            <div class="form-group">
-                                <label for="accountAmount">Сметка</label>
-                                <input type="text" class="form-control" id="accountAmount" placeholder="accountAmount" th:field="*{accountAmount}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="role">Роля</label>
-                                <select class="form-control" id="role" th:field="*{role}" required>
-                                    <option value="" disabled selected>Изберете роля</option>
-                                    <option th:each="role : ${T(app.User.model.UserRole).values()}" th:value="${role}"
-                                            th:text="${role}"></option>
-                                </select>
-                            </div>
-
-                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Промени</button>
+                        <div class="form-group">
+                            <label for="messageText">Съобщение</label>
+                            <textarea class="form-control" id="messageText" placeholder="messageText"
+                                      th:field="*{messageText}"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary logout"
+                                    onclick="window.location.href='/message/list'">Излез
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

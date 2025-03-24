@@ -7,6 +7,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MessageService {
@@ -31,6 +33,25 @@ public class MessageService {
                 .build();
 
         messageRepository.save(message);
+
+    }
+
+    public List<Message> getAllMessages() {
+        return messageRepository.findAllByMessageStatus(MessageStaus.WRITEN);
+    }
+
+    public Message getMessageById(UUID id) {
+
+        Message message = messageRepository.findById(id).orElse(null);
+        message.setMessageStatus(MessageStaus.READ);
+        messageRepository.save(message);
+
+        return message;
+    }
+
+    public String getUserEmail(UUID id) {
+
+        return messageRepository.findById(id).orElse(null).getUser().getEmail();
 
     }
 }

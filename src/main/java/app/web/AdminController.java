@@ -53,7 +53,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("/userEditAdmin")
+    @PutMapping("/userEditAdmin")
     public String EditUserAdmin(UserEditRequestAdmin userEditRequestAdmin) {
 
         userService.editUserDetailsAdmin(userEditRequestAdmin);

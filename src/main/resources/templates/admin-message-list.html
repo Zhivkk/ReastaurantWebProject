@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml" xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -36,55 +36,47 @@
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <h1 class="sitename" style="color: darkgoldenrod;">ресторант Вистоди</h1>
 
-            <div class="ms-auto d-flex gap-2">
-                <a th:if="${!session.isEmpty()}" class="logout" href="/logout">Излез</a> <!-- покажи ако има потребител-->
-            </div>
+            <a>
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h1 class="sitename">ресторант Вистоди</h1>
+
+                <div class="ms-auto d-flex gap-2">
+                    <a th:href="@{/admin}">Излез</a> <!-- покажи ако има потребител-->
+                </div>
+<!--                <a th:href="@{/errand/delivery}" class="cta-btn">Опресни</a>-->
+            </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-
         </div>
-
     </div>
-
 </header>
-
 <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
-        <img src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
-        <div class="container">
+    <section id="about" class="about section">
+        <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
-                <div class="col-lg-8 d-flex flex-column align-items-center align-items-lg-start">
-                    <h3 data-aos="fade-up" data-aos-delay="100">Административен панел</h3>
-                    <div style="height: 20px;"></div>
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/users/list}" class="cta-btn">Спъкък с потребители</a>
-                        <span class="me-3">Показва списък на всички потребители, с възможност за промяна на профилите</span>
+                <div class="row">
+                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color)">Списък на съобщения</h4>
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label style="font-size: 24px; text-align: center; color: var(--accent-color)">Тема на съобщения:</label>
+                        </div>
+                        </div>
+                        <h1 style="margin-bottom: 20px"></h1>
+                    </div>
+                    <h1></h1>
+                    <div th:each ="message : ${messages}" class="row" >
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="menu-content" style="font-size: 18px;"><a th:text="${message.getSubject()}" th:href="@{'/messages/' + ${message.getId()}}"></a></div>
+                        </div>
+
                     </div>
 
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/products/create}" class="cta-btn">Добавяне на продукт</a>
-                        <span class="me-3">Дава възможност за добавяне на продукти към менюто</span>
-                    </div>
-
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/home}" class="cta-btn">За доставка</a>
-                        <span class="me-3">Показва спиък на съставки с намалена наличност</span>
-                    </div>
-
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/message/list}" class="cta-btn">Съобщения</a>
-                        <span class="me-3">Показва списък на всички съобщения от потребители с възможност за отговор</span>
-                    </div>
-
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/home}" class="cta-btn">Запазени маси</a>
-                        <span class="me-3">Показва всички запазени маси с възможност за промяна</span>
-                    </div>
                 </div>
             </div>
         </div>
