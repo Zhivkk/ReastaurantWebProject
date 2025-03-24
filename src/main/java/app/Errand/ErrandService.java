@@ -153,7 +153,19 @@ public class ErrandService {
         for (Errand errand : errands) {
             List<Cart> carts = errand.getCarts();
             for (Cart cart : carts) {
-                if (cart.getIsReady().equals(false) && !cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL) || !cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)) {
+                if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SOUP)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.APPETIZER)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.MAIN_COURSE)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.DESSERT)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.OTHER)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SPECIALS)) {
+                    isReadyForAdd = true;
+                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SALLAD)) {
                     isReadyForAdd = true;
                 }
             }
