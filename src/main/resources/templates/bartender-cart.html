@@ -38,11 +38,11 @@
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a  class="logo d-flex align-items-center me-auto me-xl-0">
-                <h1 class="sitename">ресторант Вистоди</h1>
+                <h1 class="sitename" style="color: darkgoldenrod;">ресторант Вистоди</h1>
             </a>
 
             <div class="ms-auto d-flex gap-2">
-                <a style="color: gold" th:href="@{/bartender}" class="cta-btn">Назад</a>
+                <a style="color: darkgoldenrod" th:href="@{/bartender}" class="cta-btn">Назад</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -63,36 +63,45 @@
                 <h1></h1>
                 <h1></h1>
                 <h1></h1>
-                <h4 style="font-size: 25px; margin-bottom: 20px">Поръчка на клиента:</h4>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Продукт</label>
-                    </div>
-                    <div class="col-lg-1 col-md-6">
-                        <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Количество</label>
-                    </div>
-                    <div class="col-lg-1 col-md-6">
-                        <label style="font-size: 18px; text-align: center">Действие</label>
-                    </div>
-                    <h1 style="margin-bottom: 20px"></h1>
-                </div>
-                <h1></h1>
-                <div th:each ="cart : ${carts}" class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <a th:href="@{'/products/' + ${cart.getProduct().getId()} + '/product-details'}" th:text="${cart.product.getProductName()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px; margin-bottom: 20px;"></a>
-                    </div>
-                    <div class="col-lg-1 col-md-6">
-                        <h5 th:text="${cart.getQuantity()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px; text-align: center"></h5>
-                    </div>
-                    <div class="col-lg-1 col-md-6">
-                        <form th:action="@{'/bartenderCart/' + ${cart.getId()} + '/finish'}" th:method="post" method="post" style="display: inline;">
-                            <input type="hidden" name="_method" value="POST"/>
-                            <button type="submit" class="btn btn-danger">Завършено</button>
-                        </form>
-                    </div>
-
-
-                </div>
+                <h4 style="font-size: 25px; margin-bottom: 20px; text-align: center; color: darkgoldenrod;">Поръчка на клиента:</h4>
+                <table style="border: 2px solid darkgoldenrod; background-color: black; width: 100%; text-align: center; color: darkgoldenrod;">
+                    <thead>
+                    <tr>
+                        <th style="border: 2px solid darkgoldenrod; padding: 10px;">Продукт:</th>
+                        <th style="border: 2px solid darkgoldenrod; padding: 10px;">Количество:</th>
+                        <th style="border: 2px solid darkgoldenrod; padding: 10px;">Завършване на компонент:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cart : ${carts}">
+                        <td style="border: 2px solid darkgoldenrod; padding: 10px;">
+                            <a th:href="@{'/products/' + ${cart.getProduct().getId()} + '/product-details'}"
+                               th:text="${cart.product.getProductName()}"
+                               data-aos="fade-up"
+                               data-aos-delay="100"
+                               style="font-size: 18px; color: darkgoldenrod;"></a>
+                        </td>
+                        <td style="border: 2px solid darkgoldenrod; padding: 10px;">
+                            <h5 th:text="${cart.getQuantity()}"
+                                data-aos="fade-up"
+                                data-aos-delay="100"
+                                style="font-size: 18px; color: darkgoldenrod;"></h5>
+                        </td>
+                        <td style="border: 2px solid darkgoldenrod; padding: 10px;">
+                            <form th:action="@{'/bartenderCart/' + ${cart.getId()} + '/finish'}"
+                                  th:method="post"
+                                  method="post"
+                                  style="display: inline;">
+                                <input type="hidden" name="_method" value="POST"/>
+                                <button type="submit" class="btn"
+                                        style="border: none; background-color: var(--accent-color); color: white; padding: 10px 25px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, transform 0.2s;">
+                                    Завърши
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
 
