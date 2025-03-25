@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml" xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - Restaurant Web Project</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+<header id="header" class="header fixed-top">
+
+    <div class="branding d-flex align-items-cente">
+
+        <div class="container position-relative d-flex align-items-center justify-content-between"><a>
+            <h1 class="sitename" style="color: darkgoldenrod;user-select: none;">ресторант Вистоди</h1></a>
+            <div class="ms-auto d-flex gap-2">
+                <a th:href="@{/bartender}" class="cta-btn">Опресни</a>
+            </div>
+
+            <nav id="navmenu" class="navmenu">
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </div>
+</header>
+<main class="main">
+    <section id="about" class="about section">
+        <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+                <div class="row">
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color);user-select: none;">Питиета за приготвяне</h4>
+                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div style="height: 20px;"></div>
+                    <div class="row">
+                        <table style="width: 100%; border-collapse: collapse; background-color: black; color: white;">
+                            <thead>
+                            <tr style="border: 2px solid #b8860b;">
+                                <th style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;user-select: none;">
+                                    Налични поръчки:
+                                </th>
+                                <th style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;user-select: none;">
+                                    Към поръчката:
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each=" reservation: ${allReservations}">
+                            <tr>
+                                <td style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;user-select: none;">
+                                    <div class="menu-content"><a th:text="${reservation.getUserName}"></a></div>
+                                </td>
+                                <td style="border: 2px solid #b8860b; text-align: center; padding: 10px;">
+<!--                                    <form action="#" method="get" style="display: inline-block; width: 100%;">-->
+<!--                                        <button type="submit" th:formaction="@{'/bartenderCart/' + ${errand.getId()}}"-->
+<!--                                                class="cta-btn"-->
+<!--                                                style="border: none; background-color: var(&#45;&#45;accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">-->
+<!--                                            Поръчка-->
+<!--                                        </button>-->
+<!--                                    </form>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Main JS File -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

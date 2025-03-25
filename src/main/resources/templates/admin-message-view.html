@@ -119,6 +119,12 @@
                             <textarea class="form-control" id="messageText" placeholder="messageText"
                                       th:field="*{messageText}"></textarea>
                         </div>
+                        <i class="bi bi-envelope d-flex align-items-center">
+                            <a th:href="'mailto:' + ${email}">
+                                <span th:text="${email}"></span>
+                            </a>
+                        </i>
+
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-primary logout"
                                     onclick="window.location.href='/message/list'">Излез
