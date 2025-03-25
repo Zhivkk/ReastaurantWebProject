@@ -38,7 +38,7 @@
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a>
-                <h1 class="sitename" style="color: darkgoldenrod;">ресторант Вистоди</h1></a>
+                <h1 class="sitename" style="color: darkgoldenrod;user-select: none;">ресторант Вистоди</h1></a>
 
             <div class="ms-auto d-flex gap-2">
                 <a th:href="@{/delivery}" class="cta-btn">Опресни</a>
@@ -57,29 +57,29 @@
                     <h1></h1>
                     <h1></h1>
                     <h1></h1>
-                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color); text-align: center;">Поръчки за доставка:</h4>
+                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color); text-align: center;user-select: none;">Поръчки за доставка:</h4>
                     
                     <div th:each="errand : ${errands}" style="margin-bottom: 20px;">
                         <table style="width: 100%; border-collapse: collapse; background-color: black; color: darkgoldenrod;">
                             <thead>
                             <tr style="border: 2px solid darkgoldenrod;">
-                                <th style="padding: 10px; border: 2px solid darkgoldenrod;">Номер на поръчка:</th>
-                                <th style="padding: 10px; border: 2px solid darkgoldenrod;">Цена:</th>
-                                <th style="padding: 10px; border: 2px solid darkgoldenrod;">Адрес:</th>
-                                <th style="padding: 10px; border: 2px solid darkgoldenrod;">Приключане на поръчката:</th>
+                                <th style="padding: 10px; border: 2px solid darkgoldenrod;user-select: none;">Номер на поръчка:</th>
+                                <th style="padding: 10px; border: 2px solid darkgoldenrod;user-select: none;">Цена:</th>
+                                <th style="padding: 10px; border: 2px solid darkgoldenrod;user-select: none;">Адрес:</th>
+                                <th style="padding: 10px; border: 2px solid darkgoldenrod;user-select: none;">Приключане на поръчката:</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr style="border: 2px solid darkgoldenrod;">
-                                <td style="padding: 10px; border: 2px solid darkgoldenrod; font-size: 18px;">
+                                <td style="padding: 10px; border: 2px solid darkgoldenrod; font-size: 18px;user-select: none;">
                                     <a th:text="${errand.getId()}" style="color: darkgoldenrod;"></a>
                                 </td>
-                                <td style="padding: 10px; border: 2px solid darkgoldenrod; font-size: 18px;"
+                                <td style="padding: 10px; border: 2px solid darkgoldenrod; font-size: 18px;user-select: none;"
                                     data-aos="fade-up" data-aos-delay="100">
                                     <h5 th:text="${errand.getPrice() + ' лв.'}"
                                         style="margin: 0; color: darkgoldenrod;"></h5>
                                 </td>
-                                <td style="padding: 10px; border: 2px solid darkgoldenrod; font-size: 18px;"
+                                <td style="padding: 10px; border: 2px solid darkgoldenrod; font-size: 18px;user-select: none;"
                                     data-aos="fade-up" data-aos-delay="100">
                                     <h5 th:text="${errand.getAddressForDelivery()}"
                                         style="margin: 0; color: darkgoldenrod;"></h5>

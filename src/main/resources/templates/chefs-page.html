@@ -36,7 +36,7 @@
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between"><a>
-            <h1 class="sitename" style="color: darkgoldenrod;">ресторант Вистоди</h1></a>
+            <h1 class="sitename" style="color: darkgoldenrod;user-select: none;">ресторант Вистоди</h1></a>
 
             <div class="ms-auto d-flex gap-2">
                 <a th:href="@{/chef}" class="cta-btn">Опресни</a>
@@ -55,17 +55,17 @@
                     <table style="width: 100%; border-collapse: collapse; background-color: black; color: white;">
                         <thead>
                         <tr style="border: 2px solid #b8860b;">
-                            <th style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;">
+                            <th style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;user-select: none;">
                                 Налични поръчки:
                             </th>
-                            <th style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;">
+                            <th style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;user-select: none;">
                                 Към поръчката:
                             </th>
                         </tr>
                         </thead>
                         <tbody th:each="errand : ${errands}">
                         <tr>
-                            <td style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;">
+                            <td style="border: 2px solid #b8860b; font-size: 18px; text-align: center; padding: 10px; color: darkgoldenrod;user-select: none;">
                                 <div class="menu-content"><a th:text="${errand.getId()}"></a></div>
                             </td>
                             <td style="border: 2px solid #b8860b; text-align: center; padding: 10px;">

@@ -38,14 +38,11 @@
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a>
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">ресторант Вистоди</h1>
+                <h1 class="sitename" style="color: darkgoldenrod;user-select: none;">ресторант Вистоди</h1></a>
 
                 <div class="ms-auto d-flex gap-2">
-                    <a th:href="@{/admin}">Излез</a> <!-- покажи ако има потребител-->
+                    <a th:href="@{/admin}">Назад</a>
                 </div>
-<!--                <a th:href="@{/errand/delivery}" class="cta-btn">Опресни</a>-->
             </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -58,24 +55,34 @@
         <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
                 <div class="row">
-                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color)">Списък на съобщения</h4>
-                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
-                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <label style="font-size: 24px; text-align: center; color: var(--accent-color)">Тема на съобщения:</label>
-                        </div>
-                        </div>
-                        <h1 style="margin-bottom: 20px"></h1>
-                    </div>
-                    <h1></h1>
-                    <div th:each ="message : ${messages}" class="row" >
+                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color); text-align: Left;user-select: none;">Налични съобщения:</h4>
 
-                        <div class="col-lg-6 col-md-6">
-                            <div class="menu-content" style="font-size: 18px;"><a th:text="${message.getSubject()}" th:href="@{'/messages/' + ${message.getId()}}"></a></div>
-                        </div>
 
-                    </div>
+                    <table style="width: 100%; border-collapse: collapse; background-color: black; color: darkgoldenrod;user-select: none;">
+                        <thead>
+                        <tr style="border-bottom: 2px solid goldenrod; text-align: center;">
+                            <th style="padding: 10px; font-size: 18px; border: 2px solid goldenrod; color: darkgoldenrod;user-select: none;">
+                                Тема на съобщението:
+                            </th>
+                            <th style="padding: 10px; font-size: 18px; border: 2px solid goldenrod; color: darkgoldenrod;user-select: none;">
+                                Прочети съобщението:
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="message : ${messages}"
+                            style="border-bottom: 1px solid goldenrod; text-align: center;">
+                            <td style="padding: 10px; font-size: 18px; border: 2px solid goldenrod; color: darkgoldenrod;user-select: none;">
+                                <span th:text="${message.getSubject()}"></span>
+                            </td>
+                            <td style="padding: 10px; font-size: 18px; border: 2px solid goldenrod; color: darkgoldenrod;">
+                                <a th:href="@{'/messages/' + ${message.getId()}}"
+                                   class="btn btn-primary"
+                                   style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">View</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
