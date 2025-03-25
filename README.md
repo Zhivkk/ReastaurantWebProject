@@ -2,7 +2,7 @@ Application for managing a restaurant and selling food online.
 
 The main database information is stored here: https://github.com/Zhivkk/RestaurantWebProjectResources . Includes information about the products offered, their ingredients and the relationship between them, as well as all used product photos. When the application is launched, the local database is synchronized with the information in github. The user database is local (MySQL) and is not synchronized.
 
-They have developed 2 external API's:
+They have developed 2 external microservices:
 1. Notification - sends messages to users on key events - successful registration, expected delivery, etc. - https://github.com/Zhivkk/notification/tree/master
 2. Reservation - handles table reservation activities by users - https://github.com/Zhivkk/reservation
 
