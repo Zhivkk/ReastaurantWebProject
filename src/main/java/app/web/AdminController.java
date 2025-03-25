@@ -4,6 +4,7 @@ import app.Security.UserInfo;
 import app.User.model.User;
 import app.User.service.UserService;
 import app.web.dto.UserEditRequestAdmin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +25,13 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @PreAuthorize( "hasRole('ADMIN')")
     @GetMapping("/admin")
     public String getAdminPage() {
     return "admin-page";
     }
 
+    @PreAuthorize( "hasRole('ADMIN')")
     @GetMapping("/users/list")
     public ModelAndView UserListPage() {
 
@@ -41,6 +44,7 @@ public class AdminController {
 
     }
 
+    @PreAuthorize( "hasRole('ADMIN')")
     @GetMapping("/users/{id}")
     public ModelAndView getUserEditPageAsAdmin( @PathVariable UUID id) {
 
@@ -53,6 +57,7 @@ public class AdminController {
         return modelAndView;
     }
 
+    @PreAuthorize( "hasRole('ADMIN')")
     @PutMapping("/userEditAdmin")
     public String EditUserAdmin(UserEditRequestAdmin userEditRequestAdmin) {
 

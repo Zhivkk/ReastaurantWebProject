@@ -6,6 +6,7 @@ import app.Errand.ErrandService;
 import app.Security.UserInfo;
 import app.User.model.User;
 import app.User.repository.UserRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,7 @@ public class CartController {
         this.cartRepository = cartRepository;
     }
 
+    @PreAuthorize( "hasRole('CLIENT')")
     @GetMapping("/cart")
     public ModelAndView getCartPage(@AuthenticationPrincipal UserInfo userInfo) {
 
@@ -52,6 +54,7 @@ public class CartController {
 
     }
 
+    @PreAuthorize( "hasRole('CLIENT')")
     @DeleteMapping("/cart/{id}/delete")
     public String removeFromCart(@AuthenticationPrincipal UserInfo userInfo, @PathVariable UUID id) {
 
@@ -61,6 +64,7 @@ public class CartController {
 
     }
 
+    @PreAuthorize( "hasRole('CHEF')")
     @GetMapping("/chefCart/{id}")
     public ModelAndView getChefsCartPage(@PathVariable UUID id) {
 
@@ -74,6 +78,7 @@ public class CartController {
 
     }
 
+    @PreAuthorize( "hasRole('CHEF')")
     @PostMapping("/chefCart/{id}/finish")
     public String finishedChefsCart(@PathVariable UUID id) {
 
@@ -84,6 +89,7 @@ public class CartController {
         return "redirect:/chefCart/" + errandID;
     }
 
+    @PreAuthorize( "hasRole('BARTENDER')")
     @GetMapping("/bartenderCart/{id}")
     public ModelAndView getBartenderCartPage(@PathVariable UUID id) {
 
@@ -97,6 +103,7 @@ public class CartController {
 
     }
 
+    @PreAuthorize( "hasRole('BARTENDER')")
     @PostMapping("/bartenderCart/{id}/finish")
     public String finishedBartendersCart(@PathVariable UUID id) {
 

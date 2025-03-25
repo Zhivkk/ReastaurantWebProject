@@ -2,6 +2,7 @@ package app.web;
 
 import app.Errand.Errand;
 import app.Errand.ErrandService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ public class DeliveryController {
         this.errandService = errandService;
     }
 
+    @PreAuthorize( "hasRole('SUPPLIER')")
     @GetMapping("/delivery")
     public ModelAndView DeliveryPage() {
 
@@ -33,6 +35,7 @@ public class DeliveryController {
 
     }
 
+    @PreAuthorize( "hasRole('SUPPLIER')")
     @PutMapping("/delivery/{id}/finish")
     public String finnishDelivery(@PathVariable UUID id) {
 

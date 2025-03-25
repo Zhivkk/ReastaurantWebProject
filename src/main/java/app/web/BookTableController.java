@@ -4,6 +4,7 @@ import app.APIReservation.DTO.ReservationRequest;
 import app.APIReservation.ReservationClient;
 import app.APIReservation.ReservationService;
 import app.Security.UserInfo;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class BookTableController {
         this.reservationService = reservationService;
     }
 
+    @PreAuthorize( "hasRole('CLIENT')")
     @GetMapping("/reservation")
     public ModelAndView BookTablePage(@AuthenticationPrincipal UserInfo userInfo){
     ReservationRequest reservationRequest = reservationService.addUserInfo(userInfo.getId());
@@ -34,6 +36,7 @@ public class BookTableController {
     return modelAndView;
     }
 
+    @PreAuthorize( "hasRole('CLIENT')")
     @PostMapping("/reservation")
     public String makeReservation(ReservationRequest reservationRequest){
         reservationClient.makeReservation(reservationRequest);

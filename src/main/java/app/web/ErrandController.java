@@ -6,6 +6,7 @@ import app.Security.UserInfo;
 import app.User.model.User;
 import app.User.service.UserService;
 import app.web.dto.AddCartRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class ErrandController {
         this.userService = userService;
     }
 
+    @PreAuthorize( "hasRole('CLIENT')")
     @PostMapping("/addToCart/{id}")
     public String ErrandController(@PathVariable Long id,  @AuthenticationPrincipal UserInfo UserInfo, AddCartRequest addCartRequest) {
 
@@ -36,6 +38,7 @@ public class ErrandController {
         return "redirect:/cart";
     }
 
+    @PreAuthorize( "hasRole('CLIENT')")
     @GetMapping("/finish")
     public String finishingTheErrandFromTheClientSite(@AuthenticationPrincipal UserInfo UserInfo) {
 
@@ -44,6 +47,7 @@ public class ErrandController {
         return "redirect:/home";
     }
 
+    @PreAuthorize( "hasRole('CHEF')")
     @GetMapping("/chef")
     public ModelAndView getChefsPage(@AuthenticationPrincipal UserInfo userInfo) {
 
@@ -56,6 +60,7 @@ public class ErrandController {
         return modelAndView;
     }
 
+    @PreAuthorize( "hasRole('BARTENDER')")
     @GetMapping("/bartender")
     public ModelAndView getBartenderPage(@AuthenticationPrincipal UserInfo userInfo) {
 

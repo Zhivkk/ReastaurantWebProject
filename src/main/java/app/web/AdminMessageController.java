@@ -2,6 +2,7 @@ package app.web;
 
 import app.Message.Message;
 import app.Message.MessageService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ public class AdminMessageController {
         this.messageService = messageService;
     }
 
+    @PreAuthorize( "hasRole('ADMIN')")
     @GetMapping("/message/list")
     public ModelAndView UserListPage() {
 
@@ -32,6 +34,7 @@ public class AdminMessageController {
 
     }
 
+    @PreAuthorize( "hasRole('ADMIN')")
     @GetMapping("/messages/{id}")
     public ModelAndView MessageFromUser(@PathVariable UUID id) {
 
