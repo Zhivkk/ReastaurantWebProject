@@ -26,13 +26,13 @@ public class ProductService {
 
     public Product getById (Long id){
 
-        Product product = productRepository.findById(id).orElse(null);
+        Product product = productRepository.findById(id).orElseThrow(RuntimeException::new);
         return product;
     }
 
     public String getProductIngredients(Long id) {
 
-        Product product = productRepository.findById(id).orElse(null);
+        Product product = productRepository.findById(id).orElseThrow(RuntimeException::new);
 
         List<ProductIngredient> productIngredients = product.getProductIngredients();
 

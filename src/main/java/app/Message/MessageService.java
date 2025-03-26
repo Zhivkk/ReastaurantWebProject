@@ -24,7 +24,7 @@ public class MessageService {
     public void addMessage(MessageRequest messageRequest) {
 
         Message message = Message.builder()
-                .user(userRepository.findByUsername(messageRequest.getName()).orElse(null))
+                .user(userRepository.findByUsername(messageRequest.getName()).orElseThrow(RuntimeException::new))
                 .subject(messageRequest.getSubject())
                 .messageText(messageRequest.getMessage())
                 .messageStatus(MessageStaus.WRITEN)
@@ -42,7 +42,7 @@ public class MessageService {
 
     public Message getMessageById(UUID id) {
 
-        Message message = messageRepository.findById(id).orElse(null);
+        Message message = messageRepository.findById(id).orElseThrow(RuntimeException::new);
         message.setMessageStatus(MessageStaus.READ);
         messageRepository.save(message);
 
@@ -51,7 +51,7 @@ public class MessageService {
 
     public String getUserEmail(UUID id) {
 
-        return messageRepository.findById(id).orElse(null).getUser().getEmail();
+        return messageRepository.findById(id).orElseThrow(RuntimeException::new).getUser().getEmail();
 
     }
 }

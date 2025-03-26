@@ -7,6 +7,8 @@ import app.exception.DomainException;
 import app.User.model.User;
 import app.User.model.UserRole;
 import app.User.repository.UserRepository;
+import app.exception.UserDontExistException;
+import app.exception.UsernameAlreadyExistException;
 import app.web.dto.RegisterRequest;
 import app.web.dto.UserEditRequest;
 import app.web.dto.UserEditRequestAdmin;
@@ -49,7 +51,7 @@ public class UserService implements UserDetailsService {
 
         Optional<User> optionUser = userRepository.findByUsername(registerRequest.getUsername());
         if (optionUser.isPresent()) {
-            throw new DomainException("Username [%s] already exist.".formatted(registerRequest.getUsername()));
+            throw new UsernameAlreadyExistException("Това потребителско име %s вече съществува.".formatted(registerRequest.getUsername()));
         }
 
         User user = User.builder()
@@ -81,7 +83,7 @@ public class UserService implements UserDetailsService {
 
     public User getById(UUID userId) {
 
-        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User with id [%s] does not exist.".formatted(userId)));
+        return userRepository.findById(userId).orElseThrow(() -> new UserDontExistException("User does not exist."));
     }
 
 

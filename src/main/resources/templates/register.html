@@ -138,6 +138,7 @@
                             <input type="text" class="form-control" id="address" placeholder="address" th:field="*{address}" required>
                         </div>
 
+                        <p class="text-danger" th:text="${usernameAlreadyExistMessage}" ></p>
                         <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Регистрация</button>
                         <p class="text-center mt-3">Вече имате акаунт? <a href="/login">Влезте</a>!</p>
                         <p class="text-center mt-3">Или преминете към <a href="/home">Началната страница</a>!</p>

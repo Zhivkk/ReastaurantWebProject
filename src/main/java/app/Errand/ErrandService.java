@@ -5,6 +5,7 @@ import app.APIMessage.MailClient;
 import app.APIMessage.MailRequest;
 import app.Cart.Cart;
 import app.Cart.CartRepository;
+import app.Product.Product;
 import app.Product.ProductCategory;
 import app.Product.ProductRepository;
 import app.Security.UserInfo;
@@ -41,6 +42,9 @@ public class ErrandService {
     public void addCartToErrand(User user, AddCartRequest addCartRequest, Long id) {
 
         if(addCartRequest.getQuantity() > 0) {
+
+            Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+
             if (errandRepository.findByUserAndErrandStatus(user, ErrandStatus.PREPARATION).isEmpty()) {
 
                 Errand errand = Errand.builder()
@@ -53,7 +57,7 @@ public class ErrandService {
 
                 Cart cart = Cart.builder()
                         .errand(errand)
-                        .product(productRepository.findById(id).orElse(null))
+                        .product(product)
                         .quantity(addCartRequest.getQuantity())
                         .updatedOn(LocalDateTime.now())
                         .createdOn(LocalDateTime.now())
@@ -69,7 +73,7 @@ public class ErrandService {
 
                 Cart cart = Cart.builder()
                         .errand(errand)
-                        .product(productRepository.findById(id).orElse(null))
+                        .product(product)
                         .quantity(addCartRequest.getQuantity())
                         .updatedOn(LocalDateTime.now())
                         .createdOn(LocalDateTime.now())
@@ -86,8 +90,10 @@ public class ErrandService {
 
     public List<Cart> getAllCartsByUser(UUID userId) {
 
-       Errand errand = errandRepository
-               .findByUserAndErrandStatus(userRepository.findById(userId).orElse(null), ErrandStatus.PREPARATION)
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        Errand errand = errandRepository
+               .findByUserAndErrandStatus(user, ErrandStatus.PREPARATION)
                .stream().findFirst().orElse(null);
 
         return errand.getCarts();
@@ -96,8 +102,10 @@ public class ErrandService {
 
     public void removeFromCart( UserInfo userInfo , UUID Id) {
 
+        User user = userRepository.findById(userInfo.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+
         Errand errand = errandRepository
-                .findByUserAndErrandStatus(userRepository.findById(userInfo.getUserId()).orElse(null), ErrandStatus.PREPARATION)
+                .findByUserAndErrandStatus(user, ErrandStatus.PREPARATION)
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -126,22 +134,15 @@ public class ErrandService {
 
         BigDecimal totalPrice = getTotalPrice(id);
 
-        User user = userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setAccountAmount(user.getAccountAmount().subtract(totalPrice));
         userRepository.save(user);
 
-        Errand errand = errandRepository.findByUserAndErrandStatus(user, ErrandStatus.PREPARATION).stream().findFirst().orElse(null);
+        Errand errand = errandRepository.findByUserAndErrandStatus(user, ErrandStatus.PREPARATION).stream()
+                .findFirst().orElseThrow(() -> new RuntimeException("Errand not found"));
         errand.setErrandStatus(ErrandStatus.FOR_EXECUTION);
         errand.setPrice(totalPrice);
         errandRepository.save(errand);
-
-//        MailRequest mailRequest = MailRequest.builder()
-//                .recipient(user.getEmail())
-//                .subject("Order Placed")
-//                .body("Здравейте! Вие успешно регистрирахте поръчка в ресторант Вистоди")
-//                .build();
-//        mailClient.sendMail(mailRequest);
-
     }
 
     public List<Errand> getAllErrandsForChefs() {
@@ -149,6 +150,8 @@ public class ErrandService {
         List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION);
         List<Errand> errandsFiltered = new ArrayList<>();
         Boolean isReadyForAdd = false;
+
+//        TODO for is to stay same
 
         for (Errand errand : errands) {
             List<Cart> carts = errand.getCarts();
@@ -179,7 +182,7 @@ public class ErrandService {
 
     public List<Cart> getCartsByErrandIdForChef(UUID id) {
 
-        Errand errand = errandRepository.findById(id).orElse(null);
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new RuntimeException("Errand not found"));
 
         List<Cart> carts = errand.getCarts().stream()
                 .filter(cart -> !cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
@@ -192,7 +195,7 @@ public class ErrandService {
     }
 
     public void checkStatus(UUID id) {
-        Cart cart = cartRepository.findById(id).orElse(null);
+        Cart cart = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("Cart not found"));
         cart.setIsReady(true);
         cartRepository.save(cart);
 
@@ -240,7 +243,7 @@ public class ErrandService {
 
     public List<Cart> getCartsByErrandIdForBartender(UUID id) {
 
-        Errand errand = errandRepository.findById(id).orElse(null);
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new RuntimeException("Errand not found"));
 
         List<Cart> carts = errand.getCarts().stream()
                 .filter(cart -> cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
@@ -254,7 +257,7 @@ public class ErrandService {
 
     public String getErrandId(UUID id) {
 
-        Cart cart = cartRepository.findById(id).orElse(null);
+        Cart cart = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("Cart not found"));
 
         return cart.getErrand().getId().toString();
     }
@@ -268,7 +271,7 @@ public class ErrandService {
 
     public void finishDeliverryStatus(UUID id) {
 
-        Errand errand = errandRepository.findById(id).orElse(null);
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new RuntimeException("Errand not found"));
 
         errand.setErrandStatus(ErrandStatus.DELIVERED);
         errandRepository.save(errand);
