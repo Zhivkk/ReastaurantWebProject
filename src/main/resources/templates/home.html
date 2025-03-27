@@ -403,6 +403,9 @@
                     <h3 th:text="${specials[0].getProductName()}"></h3>
                     <p th:text="${specials[0].getDescription()}" class="fst-italic"></p>
                     <p>   </p>
+                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                      <a th:href="@{'/products/' + ${specials[0].getId()} + '/product-details'}" class="cta-btn">Защо не опитате!</a>
+                    </div>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img th:src="${specials[0].getPicture()}" alt="" class="img-fluid">
@@ -415,6 +418,9 @@
                     <h3 th:text = "${specials[1].getProductName()}"></h3>
                     <p th:text = "${specials[1].getDescription()}" class="fst-italic"></p>
                     <p>   </p>
+                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                      <a th:href="@{'/products/' + ${specials[1].getId()} + '/product-details'}" class="cta-btn">Защо не опитате!</a>
+                    </div>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img th:src = "${specials[1].getPicture()}" alt="" class="img-fluid">
@@ -427,6 +433,9 @@
                     <h3 th:text="${specials[2].getProductName()}"></h3>
                     <p th:text = "${specials[2].getDescription()}" class="fst-italic"></p>
                     <p> </p>
+                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                      <a th:href="@{'/products/' + ${specials[2].getId()} + '/product-details'}" class="cta-btn">Защо не опитате!</a>
+                    </div>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img th:src ="${specials[2].getPicture()}" alt="" class="img-fluid">
@@ -439,6 +448,9 @@
                     <h3 th:text = "${specials[3].getProductName()}" ></h3>
                     <p th:text = "${specials[3].getDescription()}" class="fst-italic"></p>
                     <p>     </p>
+                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                      <a th:href="@{'/products/' + ${specials[3].getId()} + '/product-details'}" class="cta-btn">Защо не опитате!</a>
+                    </div>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img th:src = "${specials[3].getPicture()}" alt="" class="img-fluid">
@@ -451,6 +463,9 @@
                     <h3 th:text ="${specials[4].getProductName()}" ></h3>
                     <p  th:text ="${specials[4].getDescription()}" class="fst-italic"></p>
                     <p>     </p>
+                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                      <a th:href="@{'/products/' + ${specials[4].getId()} + '/product-details'}" class="cta-btn">Защо не опитате!</a>
+                    </div>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img th:src = "${specials[4].getPicture()}" alt="" class="img-fluid">

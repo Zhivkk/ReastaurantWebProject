@@ -64,19 +64,12 @@
 </head>
 <body>
 <header id="header" class="header fixed-top">
-
     <div class="branding d-flex align-items-cente">
-
         <div class="container position-relative d-flex align-items-center justify-content-between">
-                <h1 class="sitename" style="user-select: none;">ресторант Вистоди</h1>
-            <nav id="navmenu" class="navmenu">
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
-
+            <h1 class="sitename"><h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span>
+            </h1></h1>
         </div>
-
     </div>
-
 </header>
 
 <div class="container">
@@ -85,61 +78,84 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Промяна на личните данни на клиент</h4>
-                </div>
-
-                <!-- Modal Body -->
-                <div class="modal-body">
+                
+                <div class="modal-body"
+                     style="background-color: black; border: 2px solid #b8860b; padding: 20px; border-radius: 10px;">
 
                     <form th:action="@{/userEditAdmin}" th:method="PUT" th:object="${userEditRequestAdmin}">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="id">ID</label>
-                                <input type="text" class="form-control" id="id" placeholder="id" th:field="*{id}" required>
-                                <p class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Телефон</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="Phone" th:field="*{phone}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
-                        </div>
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #b8860b; background-color: black; color: #f7f7f7;">
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="id" style="color: #b8860b;">ID</label></td>
+                                <td><input type="text" class="form-control" id="id" placeholder="id" th:field="*{id}"
+                                           required  style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;"></td>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="phone"
+                                                                       style="color: #b8860b;">Телефон</label>
+                                </td>
+                                <td><input type="tel" class="form-control" id="phone" placeholder="Phone"
+                                           th:field="*{phone}" required
+                                           style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="email" style="color: #b8860b;">Електронна
+                                    поща</label></td>
+                                <td><input type="email" class="form-control" id="email" placeholder="email"
+                                           th:field="*{email}" required
+                                           style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="address"
+                                                                       style="color: #b8860b;">Адрес</label>
+                                </td>
+                                <td><input type="text" class="form-control" id="address" placeholder="address"
+                                           th:field="*{address}" required
+                                           style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="firstName" style="color: #b8860b;">Малко
+                                    име</label></td>
+                                <td><input type="text" class="form-control" id="firstName" placeholder="firstName"
+                                           th:field="*{firstName}"
+                                           style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="lastName" style="color: #b8860b;">Фамилно
+                                    име</label></td>
+                                <td><input type="text" class="form-control" id="lastName" placeholder="lastName"
+                                           th:field="*{lastName}"
+                                           style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="accountAmount"
+                                                                       style="color: #b8860b;">Сметка</label></td>
+                                <td><input type="text" class="form-control" id="accountAmount"
+                                           placeholder="accountAmount" th:field="*{accountAmount}" required
+                                           style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                            </tr>
+                            <tr style="border-bottom: 2px solid #b8860b;">
+                                <td style="padding: 10px 20px;"><label for="role" style="color: #b8860b;">Роля</label>
+                                </td>
+                                <td>
+                                    <select class="form-control" id="role" th:field="*{role}" required
+                                            style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                                        <option value="" disabled selected>Изберете роля</option>
+                                        <option th:each="role : ${T(app.User.model.UserRole).values()}"
+                                                th:value="${role}"
+                                                th:text="${role}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
 
-                        <div class="form-group">
-                            <label for="email">Електронна поща</label>
-                            <input type="email" class="form-control" id="email" placeholder="email" th:field="*{email}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button type="submit" class="btn btn-primary"
+                                    style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap;">
+                                Промени
+                            </button>
                         </div>
-
-                        <div class="form-group">
-                            <label for="address">Адрес</label>
-                            <input type="text" class="form-control" id="address" placeholder="address" th:field="*{address}" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="firstName">Малко име</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="firstName" th:field="*{firstName}" >
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Фамилно име</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="lastName" th:field="*{lastName}" >
-                        </div>
-                            <div class="form-group">
-                                <label for="accountAmount">Сметка</label>
-                                <input type="text" class="form-control" id="accountAmount" placeholder="accountAmount" th:field="*{accountAmount}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="role">Роля</label>
-                                <select class="form-control" id="role" th:field="*{role}" required>
-                                    <option value="" disabled selected>Изберете роля</option>
-                                    <option th:each="role : ${T(app.User.model.UserRole).values()}" th:value="${role}"
-                                            th:text="${role}"></option>
-                                </select>
-                            </div>
-
-                        <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Промени</button>
                     </form>
                 </div>
             </div>

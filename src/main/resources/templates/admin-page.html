@@ -36,7 +36,8 @@
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <h1 class="sitename" style="color: darkgoldenrod;">ресторант Вистоди</h1>
+            <h1 class="sitename"><h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span>
+            </h1></h1>
 
             <div class="ms-auto d-flex gap-2">
                 <a th:if="${!session.isEmpty()}" class="logout" href="/logout">Излез</a> <!-- покажи ако има потребител-->
@@ -66,15 +67,15 @@
                         <span class="me-3">Показва списък на всички потребители, с възможност за промяна на профилите</span>
                     </div>
 
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/products/create}" class="cta-btn">Добавяне на продукт</a>
-                        <span class="me-3">Дава възможност за добавяне на продукти към менюто</span>
-                    </div>
+<!--                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">-->
+<!--                        <a th:href="@{/products/create}" class="cta-btn">Добавяне на продукт</a>-->
+<!--                        <span class="me-3">Дава възможност за добавяне на продукти към менюто</span>-->
+<!--                    </div>-->
 
-                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/home}" class="cta-btn">За доставка</a>
-                        <span class="me-3">Показва спиък на съставки с намалена наличност</span>
-                    </div>
+<!--                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">-->
+<!--                        <a th:href="@{/home}" class="cta-btn">За доставка</a>-->
+<!--                        <span class="me-3">Показва спиък на съставки с намалена наличност</span>-->
+<!--                    </div>-->
 
                     <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
                         <a th:href="@{/message/list}" class="cta-btn">Съобщения</a>

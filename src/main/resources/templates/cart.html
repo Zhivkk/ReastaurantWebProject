@@ -49,13 +49,13 @@
             <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">ресторант Вистоди</h1>
+                <h1 class="sitename"><h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span>
+                </h1></h1>
             </a>
-
-            <div class="ms-auto d-flex gap-2">
-                <a style="color: gold" th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Продължете с поръчката</a>
-                <a style="color: gold" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/finish}" class="cta-btn">Поръчай</a>
-                <a style="color: gold" th:href="@{/home#menu}" class="cta-btn">Откажи</a>
+            <div class="ms-auto d-flex gap-3">
+                <a style="color: goldenrod" th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Продължете с поръчката</a>
+                <a style="color: goldenrod" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/finish}" class="cta-btn">Поръчай</a>
+                <a style="color: goldenrod" th:href="@{/home#menu}" class="cta-btn">Откажи</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -76,7 +76,17 @@
                 <h1></h1>
                 <h1></h1>
                 <h1></h1>
-                <h4 style="font-size: 25px; margin-bottom: 20px">Вашата количка</h4>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Проудкт</label>

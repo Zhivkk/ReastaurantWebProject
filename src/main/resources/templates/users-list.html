@@ -38,14 +38,11 @@
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a>
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">ресторант Вистоди</h1>
+                <h1 class="sitename" style="color: darkgoldenrod;user-select: none;">ресторант Вистоди</h1>
 
                 <div class="ms-auto d-flex gap-2">
-                    <a th:href="@{/users/admin}">Излез</a> <!-- покажи ако има потребител-->
+                    <a th:href="@{/admin}">Излез</a>
                 </div>
-<!--                <a th:href="@{/errand/delivery}" class="cta-btn">Опресни</a>-->
             </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -57,47 +54,38 @@
     <section id="about" class="about section">
         <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
-                <div class="row">
-                    <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color)">Списък на потребители</h4>
-                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
-                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Име на потребител</label>
-                        </div>
-
-                        <div class="col-lg-2 col-md-6">
-                            <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Роля</label>
-                        </div>
-                        <div class="col-lg-1 col-md-6">
-                            <label style="font-size: 18px; text-align: center; color: var(--accent-color)">Електронна поща</label>
-                        </div>
-                        <h1 style="margin-bottom: 20px"></h1>
-                    </div>
-                    <h1></h1>
-                    <div th:each ="user : ${users}" class="row" >
-                        <div class="col-lg-6 col-md-6">
-                            <div class="menu-content" style="font-size: 18px;"><a th:text="${user.getUsername()}" th:href="@{'/users/' + ${user.getId()}}"></a></div>
-                        </div>
-
-                        <div class="col-lg-2 col-md-6">
-                            <h5 th:text="${user.getRole()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px"></h5>
-                        </div>
-
-                        <div class="col-lg-2 col-md-6" style="width: fit-content">
-                            <h5 th:text="${user.getEmail()}" data-aos="fade-up" data-aos-delay="100" style="font-size: 18px"></h5>
-                        </div>
-
-<!--                        <div class="col-lg-1 col-md-6">-->
-<!--                            <form th:action="@{'/users/' + ${user.getId()} + '/profile'}" th:method="put" method="post" style="display: inline;">-->
-<!--                                <input type="hidden" name="_method" value="DELETE"/>-->
-<!--                                <button type="submit" class="btn btn-danger">Доставено</button>-->
-<!--                            </form>-->
-<!--                        </div>-->
-
-                    </div>
-
-                </div>
+                <h4 style="font-size: 25px; margin-bottom: 20px; color: darkgoldenrod;user-select: none;">Списък на потребители:</h4>
+                <table style="width: 100%; background-color: black; border: 2px solid darkgoldenrod; text-align: center; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="border: 2px solid darkgoldenrod; padding: 10px; color: darkgoldenrod; font-size: 18px;user-select: none;">
+                            Име на потребител
+                        </th>
+                        <th style="border: 2px solid darkgoldenrod; padding: 10px; color: darkgoldenrod; font-size: 18px;user-select: none;">
+                            Роля
+                        </th>
+                        <th style="border: 2px solid darkgoldenrod; padding: 10px; color: darkgoldenrod; font-size: 18px;user-select: none;">
+                            Електронна поща
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td style="border: 2px solid darkgoldenrod; padding: 10px; color: darkgoldenrod;">
+                            <a th:text="${user.getUsername()}" th:href="@{'/users/' + ${user.getId()}}"
+                               style="border: none; background-color: var(--accent-color); color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block;"></a>
+                        </td>
+                        <td style="border: 2px solid darkgoldenrod; padding: 10px; color: darkgoldenrod;user-select: none;">
+                            <h5 th:text="${user.getRole()}"
+                                style="margin: 0; font-size: 18px; color: darkgoldenrod;user-select: none;"></h5>
+                        </td>
+                        <td style="border: 2px solid darkgoldenrod; padding: 10px; color: darkgoldenrod;user-select: none;">
+                            <h5 th:text="${user.getEmail()}"
+                                style="margin: 0; font-size: 18px; color: darkgoldenrod;user-select: none;"></h5>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>

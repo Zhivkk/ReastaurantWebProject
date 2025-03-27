@@ -49,8 +49,9 @@
             <a href="/home" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">ресторант Вистоди</h1>
-                <a th:href="@{/home#menu}" class="cta-btn">Назад към менюто</a>
+                <h1 class="sitename"><h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span>
+                </h1></h1>
+                <a th:href="@{/home}" class="cta-btn ms-auto">Назад</a>
             </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -62,6 +63,8 @@
 
 <main class="main">
     <!-- Book A Table Section -->
+    <section id="hero" class="hero section dark-background">
+        <img src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
 
     <section id="book-a-table" class="book-a-table section">
         <div style="height: 50px;"></div> <!-- добавя празен ред -->
@@ -69,38 +72,40 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Отзиви</h2>
-            <p>Препоръки</p>
+            
         </div><!-- End Section Title -->
 
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-            <form th:action="@{/messages}" th:method="POST" th:object="${messageRequest}">
-                <div class="row gy-4">
-                    <div class="col-lg-4 col-md-6">
-
-                        <input  th:field="*{name}" type="text" name="userName" class="form-control" id="name" placeholder="Your Name" readonly style=" color: blue; border: 1px solid #555;">
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <input  th:field="*{email}" type="email" class="form-control" name="Email" id="email" placeholder="Your Email" readonly style=" color: blue; border: 1px solid #555;">
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <input  th:field="*{subject}"  type="text" class="form-control" name="subject" id="subject"  placeholder="Subject" style=" color: blue; border: 1px solid #555;">
-                    </div>
-<!--                    <div class="col-lg-4 col-md-6">-->
-<!--                        <input type="text" name="text" th:field="*{message}" class="form-control" id="text" placeholder="Напишете вашия отзив" required="" style="background-color: #333; color: #fff; border: 1px solid #555;" >-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-4 col-md-6">-->
-<!--                        <input type="number"  th:field="*{guests}" class="form-control" name="guests" id="guests" placeholder="Брой гости" required="" style="background-color: #333; color: #fff; border: 1px solid #555;">-->
-<!--                    </div>-->
+            <form th:action="@{/messages}" th:method="POST" th:object="${messageRequest}" class="reservation-form">
+                <div class="form-group mb-3">
+                    <label for="name" class="fw-bold">Вашето име</label>
+                    <input th:field="*{name}" type="text" name="userName" class="form-control shadow-sm"
+                           id="name" placeholder="Вашето име" readonly
+                           style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
                 </div>
-
-                <div class="form-group mt-3">
-                    <textarea th:field="*{message}" class="form-control" name="message" rows="5" placeholder="Съобщение" style=" color: blue; border: 1px solid #555;"></textarea>
+                <div class="form-group mb-3">
+                    <label for="email" class="fw-bold">Вашият имейл</label>
+                    <input th:field="*{email}" type="email" class="form-control shadow-sm"
+                           name="Email" id="email" placeholder="Вашият имейл" readonly
+                           style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
                 </div>
-
-                <div class="text-center mt-3">
-                   <button type="submit" class="btn btn-primary">Запази</button>
+                <div class="form-group mb-3">
+                    <label for="subject" class="fw-bold">Тема</label>
+                    <input th:field="*{subject}" type="text" class="form-control shadow-sm"
+                           name="subject" id="subject" placeholder="Тема"
+                           style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="fw-bold">Съобщение</label>
+                    <textarea th:field="*{message}" class="form-control shadow-sm" name="message"
+                              rows="5" placeholder="Съобщение"
+                              style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;"></textarea>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="cta-btn btn btn-dark px-4 py-2" style="border-radius: 30px;">
+                        Изпрати
+                    </button>
                 </div>
             </form>
             <!-- End Reservation Form -->
@@ -108,7 +113,7 @@
         </div>
 
     </section><!-- /Book A Table Section -->
-
+    </section>
 </main>
 
 <!-- Scroll Top -->

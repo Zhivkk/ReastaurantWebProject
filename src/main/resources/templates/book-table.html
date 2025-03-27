@@ -49,8 +49,9 @@
             <a href="index" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">ресторант Вистоди</h1>
-                <a th:href="@{/home#menu}" class="cta-btn">Назад към менюто</a>
+                <h1 class="sitename"><h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span>
+                </h1></h1>
+                <a th:href="@{/home}" class="cta-btn" style="color: darkgoldenrod; position: absolute; right: 0;">Назад</a>
             </a>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -62,52 +63,71 @@
 
 <main class="main">
     <!-- Book A Table Section -->
+    <section id="hero" class="hero section dark-background">
+        <img src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
 
-    <section id="book-a-table" class="book-a-table section">
-        <div style="height: 50px;"></div> <!-- добавя празен ред -->
-        <div style="height: 50px;"></div>
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
+        <section id="book-a-table" class="book-a-table section">
+            <div class="container section-title" data-aos="fade-up">
             <h2>РЕЗЕРВАЦИИ</h2>
             <p>Запази маса</p>
-        </div><!-- End Section Title -->
+            </div><!-- End Section Title -->
 
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-            <form th:action="@{/reservation}" th:method="POST" th:object="${reservationRequest}">
-                <div class="row gy-4">
-                    <div class="col-lg-4 col-md-6">
-                        <input  th:field="*{userName}" type="text" name="userName" class="form-control" id="userName" placeholder="Your Name" readonly style="background-color: #333; color: #fff; border: 1px solid #555;">
+                <form th:action="@{/reservation}" th:method="POST" th:object="${reservationRequest}"
+                      class="reservation-form">
+                    <form th:action="@{/reservation}" th:method="POST" th:object="${reservationRequest}"
+                          class="reservation-form">
+                        <div class="form-group mb-3">
+                            <label for="userName" class="fw-bold">Име на профила</label>
+                            <input th:field="*{userName}" type="text" name="userName" class="form-control shadow-sm"
+                                   id="userName" placeholder="Your Name" readonly
+                                   style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="userEmail" class="fw-bold">Имейл</label>
+                            <input th:field="*{userEmail}" type="email" class="form-control shadow-sm"
+                                   name="userEmail" id="userEmail" placeholder="Your Email" readonly
+                                   style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="userPhone" class="fw-bold">Телефонен номер</label>
+                            <input th:field="*{userPhone}" type="text" class="form-control shadow-sm"
+                                   name="userPhone" id="userPhone" placeholder="Your Phone" readonly
+                                   style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="date" class="fw-bold">Дата</label>
+                            <input th:field="*{date}" type="date" name="date" class="form-control shadow-sm"
+                                   id="date" placeholder="Дата" required=""
+                                   style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="guests" class="fw-bold">Брой гости</label>
+                            <input th:field="*{guests}" type="number" class="form-control shadow-sm"
+                                   name="guests" id="guests" placeholder="Брой гости" required=""
+                                   style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Съобщение</label>
+                            <textarea th:field="*{message}" class="form-control shadow-sm" name="message"
+                                      rows="5" placeholder="Например начален час или друга информация"
+                                      style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;"></textarea>
+                        </div>
+
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="cta-btn btn btn-dark px-4 py-2" style="border-radius: 30px;">
+                            Запази
+                        </button>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <input  th:field="*{userEmail}" type="email" class="form-control" name="userEmail" id="userEmail" placeholder="Your Email" readonly style="background-color: #333; color: #fff; border: 1px solid #555;">
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <input  th:field="*{userPhone}" type="text" class="form-control" name="userPhone" id="userPhone" placeholder="Your Phone" readonly style="background-color: #333; color: #fff; border: 1px solid #555;">
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <input type="date" name="date" th:field="*{date}" class="form-control" id="date" placeholder="Дата" required="" style="background-color: #333; color: #fff; border: 1px solid #555;" >
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <input type="number"  th:field="*{guests}" class="form-control" name="guests" id="guests" placeholder="Брой гости" required="" style="background-color: #333; color: #fff; border: 1px solid #555;">
-                    </div>
-                </div>
+                </form>
+            </div>
 
-                <div class="form-group mt-3">
-                    <textarea th:field="*{message}" class="form-control" name="message" rows="5" placeholder="Съобщение, например начален час или друга информация" style="background-color: #333; color: #fff; border: 1px solid #555;"></textarea>
-                </div>
-
-                <div class="text-center mt-3">
-                   <button type="submit" class="cta-btn">Запази</button>
-                </div>
-            </form>
-            <!-- End Reservation Form -->
-
-        </div>
-
-    </section><!-- /Book A Table Section -->
-
+        </section><!-- /Book A Table Section -->
+    </section>
 </main>
 
 <!-- Scroll Top -->
@@ -126,6 +146,9 @@
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
 <!-- Main JS File -->
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js">
+
+</script>
+
 </body>
 </html>
