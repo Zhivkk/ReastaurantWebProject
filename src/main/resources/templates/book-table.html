@@ -75,8 +75,7 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                <form th:action="@{/reservation}" th:method="POST" th:object="${reservationRequest}"
-                      class="reservation-form">
+
                     <form th:action="@{/reservation}" th:method="POST" th:object="${reservationRequest}"
                           class="reservation-form">
                         <div class="form-group mb-3">
@@ -116,14 +115,13 @@
                                       style="background-color: #555; color: #fff; border: 2px solid darkgoldenrod;"></textarea>
                         </div>
 
+                        <div class="text-center mt-4">
+                            <button type="submit" class="cta-btn btn btn-dark px-4 py-2" style="border-radius: 30px;">
+                                Запази
+                            </button>
+                        </div>
                     </form>
 
-                    <div class="text-center mt-4">
-                        <button type="submit" class="cta-btn btn btn-dark px-4 py-2" style="border-radius: 30px;">
-                            Запази
-                        </button>
-                    </div>
-                </form>
             </div>
 
         </section><!-- /Book A Table Section -->

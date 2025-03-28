@@ -70,10 +70,11 @@
 
             <div class="row gy-4">
                 <div class="col-lg-6 order-1 order-lg-2">
-                    <br> <br>
-                    <br> <br>
-                    <br> <br>
-                    <img th:src ="${product.getPicture()}" class="img-fluid about-img" alt="">
+                    <br><br>
+                    <br><br>
+                    <br><br>
+                    <img th:src="${product.getPicture()}" class="img-fluid about-img" alt=""
+                         style="width: auto; height: 400px; object-fit: scale-down;">
                 </div>
                 <div class="col-lg-6 order-2 order-lg-1 content">
                     <h3 th:text = "${product.getProductName()}"  style="margin-top: 5em;"></h3>
@@ -90,15 +91,16 @@
 
                 </div>
             </div>
-
             <form th:action="@{'/addToCart/' + ${product.getId()}}" th:method="POST" th:object="${addCartRequest}">
 
                 <div th:if="${user.role.name()=='CLIENT'}" class="form-group">
-                    <label for="quantity">количество:</label>
-                    <input type="tel" class="form-check-inline" id="quantity" placeholder="quantity" th:field="*{quantity}" required >
+                    <input type="tel" class="form-check-inline" style="width: 10%;" id="quantity"
+                           placeholder="quantity" th:field="*{quantity}" required>
                 </div>
 
-                <button th:if="${user.role.name()=='CLIENT'}" type="submit" class="btn btn-primary" style="display: block; margin: 0 ;">Добави В количката</button>
+                <button th:if="${user.role.name()=='CLIENT'}" type="submit" class="btn btn-primary"
+                        style="width: 10%; margin: 0;">Добави В количката
+                </button>
             </form>
 
         </div>

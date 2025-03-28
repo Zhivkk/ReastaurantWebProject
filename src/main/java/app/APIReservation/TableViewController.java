@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -20,8 +21,11 @@ public class TableViewController {
 
     @GetMapping("/reserved")
     public ModelAndView showReservedTables() {
-        List<TableDTO> allReservations = tableStatusService.fetchAllReservations();
-        ModelAndView mav = new ModelAndView("table-reservation"); // Указваме Thymeleaf темплейта
+        List<TableDTO> allReservations = tableStatusService.fetchAllReservations()
+                .stream()
+                .sorted(Comparator.comparing(TableDTO::getDate))
+                .toList();
+        ModelAndView mav = new ModelAndView("table-reservation");
         mav.addObject("allReservations", allReservations);
         return mav;
     }
