@@ -42,14 +42,14 @@ public class ExceptionAdvice {
         return new ModelAndView("not-found");
     }
 
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler(Exception.class)
-//    public ModelAndView handleAnyException(Exception exception) {
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("internal-server-error");
-//        modelAndView.addObject("errorMessage", exception.getClass().getSimpleName());
-//
-//        return modelAndView;
-//    }
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleAnyException(Exception exception) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("internal-server-error");
+        modelAndView.addObject("errorMessage", exception.getClass().getSimpleName());
+
+        return modelAndView;
+    }
 }
