@@ -39,8 +39,9 @@
             <a>
                 <h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span></h1>
             </a>
-            <div class="ms-auto d-flex gap-2">
+            <div class="ms-auto d-flex gap-3">
                 <a th:href="@{/bartender}" class="cta-btn">Опресни</a>
+                <a th:if="${!session.isEmpty()}" class="logout" href="/logout">Излез</a>
             </div>
 
             <nav id="navmenu" class="navmenu">
@@ -58,7 +59,7 @@
                     <h1></h1>
                     <h1></h1>
                     <h4 style="font-size: 25px; margin-bottom: 20px; color: var(--accent-color);user-select: none;">Питиета за приготвяне</h4>
-                    <div style="height: 20px;"></div> <!-- добавя празен ред -->
+                    <div style="height: 20px;"></div>
                     <div style="height: 20px;"></div>
                     <div class="row">
                         <table style="width: 100%; border-collapse: collapse; background-color: black; color: white;">

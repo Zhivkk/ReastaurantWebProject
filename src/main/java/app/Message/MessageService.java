@@ -1,11 +1,8 @@
 package app.Message;
 
-import app.Security.UserInfo;
 import app.User.repository.UserRepository;
 import app.web.dto.MessageRequest;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

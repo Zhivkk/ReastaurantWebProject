@@ -4,7 +4,6 @@ import app.Errand.Errand;
 import app.Product.Product;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 

@@ -49,9 +49,9 @@
             </h1></h1>
 
             <div class="ms-auto d-flex gap-2">
-                <a th:if="${session.isEmpty()}" th:href="@{/login}" class="cta-btn">Влез   </a> <!-- покажи ако няма потребител-->
+                <a th:if="${session.isEmpty()}" th:href="@{/login}" class="cta-btn">Влез   </a>
                 <a th:if="${session.isEmpty()}" th:href="@{/register}" class="cta-btn">Регистрирай се   </a>
-                <a th:if="${!session.isEmpty()}" class="logout" href="/logout">Излез</a> <!-- покажи ако има потребител-->
+                <a th:if="${!session.isEmpty()}" class="logout" href="/logout">Излез</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

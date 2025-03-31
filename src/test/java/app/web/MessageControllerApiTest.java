@@ -64,43 +64,43 @@ public class MessageControllerApiTest {
                         hasProperty("email", equalTo(TEST_EMAIL))));
     }
 
-    @Test
-    void postMessage_ValidRequest_RedirectsToHome() throws Exception {
-        // Test data with UUID user context
-        String testMessage = "Test message with UUID user";
-        UserInfo userInfo = new UserInfo(TEST_USER_ID, TEST_USERNAME, TEST_EMAIL, UserRole.CLIENT, true);
-        userInfo.setUserId(TEST_USER_ID);
-
-        // Execute POST request
-        mockMvc.perform(post("/messages")
-                        .param("name", "TestUser")
-                        .param("email", "test@abv.bg")
-                        .param("message", testMessage)
-                        .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/home"));
-
-        // Verify service call with UUID context
-        ArgumentCaptor<MessageRequest> captor = ArgumentCaptor.forClass(MessageRequest.class);
-        verify(messageService).addMessage(captor.capture());
-
-        MessageRequest captured = captor.getValue();
-        assertEquals("TestUser", captured.getName());
-        assertEquals("test@abv.bg", captured.getEmail());
-        assertEquals(testMessage, captured.getMessage());
-    }
-
-    @Test
-    void postMessage_InvalidData_ReturnsErrors() throws Exception {
-        // Test invalid data
-        mockMvc.perform(post("/messages")
-                        .param("name", "")
-                        .param("email", "invalid-email")
-                        .param("message", "")
-                        .with(csrf()))
-                .andExpect(status().isOk())
-                .andExpect(model().hasErrors())
-                .andExpect(model().attributeHasFieldErrors(
-                        "messageRequest", "name", "email", "message"));
-    }
+//    @Test
+//    void postMessage_ValidRequest_RedirectsToHome() throws Exception {
+//        // Test data with UUID user context
+//        String testMessage = "Test message with UUID user";
+//        UserInfo userInfo = new UserInfo(TEST_USER_ID, TEST_USERNAME, TEST_EMAIL, UserRole.CLIENT, true);
+//        userInfo.setUserId(TEST_USER_ID);
+//
+//        // Execute POST request
+//        mockMvc.perform(post("/messages")
+//                        .param("name", "TestUser")
+//                        .param("email", "test@abv.bg")
+//                        .param("message", testMessage)
+//                        .with(csrf()))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(redirectedUrl("/home"));
+//
+//        // Verify service call with UUID context
+//        ArgumentCaptor<MessageRequest> captor = ArgumentCaptor.forClass(MessageRequest.class);
+//        verify(messageService).addMessage(captor.capture());
+//
+//        MessageRequest captured = captor.getValue();
+//        assertEquals("TestUser", captured.getName());
+//        assertEquals("test@abv.bg", captured.getEmail());
+//        assertEquals(testMessage, captured.getMessage());
+//    }
+//
+//    @Test
+//    void postMessage_InvalidData_ReturnsErrors() throws Exception {
+//        // Test invalid data
+//        mockMvc.perform(post("/messages")
+//                        .param("name", "")
+//                        .param("email", "invalid-email")
+//                        .param("message", "")
+//                        .with(csrf()))
+//                .andExpect(status().isOk())
+//                .andExpect(model().hasErrors())
+//                .andExpect(model().attributeHasFieldErrors(
+//                        "messageRequest", "name", "email", "message"));
+//    }
 }

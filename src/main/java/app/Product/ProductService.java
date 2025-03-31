@@ -1,14 +1,10 @@
 package app.Product;
 
-import app.Ingredient.Ingredient;
 import app.Ingredient.IngredientRepository;
 import app.ProductIngredient.ProductIngredient;
 import app.ProductIngredient.ProductIngredientRepository;
-import app.ProductIngredient.ProductIngredientService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {

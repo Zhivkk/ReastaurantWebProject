@@ -9,7 +9,6 @@ import app.ProductIngredient.ProductIngredientRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -31,7 +30,6 @@ public class DataSaver {
         this.productIngredientRepository = productIngredientRepository;
         this.objectMapper = objectMapper;
     }
-    //Сваля данните от JSON файловете на GitHub и ги зарежда в базата данни
     @PreDestroy
     public void saveDataBeforeShutdown() throws IOException, InterruptedException {
         saveIngredients();
@@ -56,13 +54,13 @@ public class DataSaver {
         objectMapper.writeValue(new File("product_ingredients.json"), productIngredients);
     }
 
-    //Записва данните в JSON файловете на GitHub
+
     public void commitAndPushToGitHub() throws IOException, InterruptedException {
         String repoUrl = "https://github.com/Zhivkk/RestaurantWebProjectResources.git";
-        String githubToken = "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"; // Пази го сигурно, можеш да го сложиш в application.properties
+        String githubToken = "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";
         String commitMessage = "Auto-update JSON files";
 
-        // Записваме bash скрипт за commit и push
+
         String script = """
         git config --global user.email "your-email@example.com"
         git config --global user.name "Your Name"
@@ -76,12 +74,10 @@ public class DataSaver {
         git push origin main
         """.formatted(githubToken, commitMessage);
 
-        // Записваме скрипта във файл
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("update_github.sh"))) {
             writer.write(script);
         }
 
-        // Изпълняваме скрипта
         Process process = Runtime.getRuntime().exec("bash update_github.sh");
         process.waitFor();
     }

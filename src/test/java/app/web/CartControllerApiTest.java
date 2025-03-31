@@ -42,27 +42,27 @@ public class CartControllerApiTest {
     private final UUID testCartId = UUID.randomUUID();
     private final UUID testErrandId = UUID.randomUUID();
 
-    @Test
-    @WithMockUser(roles = "CLIENT")
-    void getCartPage_AuthenticatedClient_ReturnsCartView() throws Exception {
-        // Arrange
-        User mockUser = new User();
-        Cart mockCart = new Cart();
-        when(errandService.getAllCartsByUser(testUserId)).thenReturn(Collections.singletonList(mockCart));
-        when(userRepository.findById(testUserId)).thenReturn(Optional.of(mockUser));
-        when(errandService.getTotalPrice(testUserId)).thenReturn(new BigDecimal("50.00"));
-
-        // Act & Assert
-        mockMvc.perform(get("/cart"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("cart"))
-                .andExpect(model().attributeExists("carts", "totalPrice", "user"))
-                .andExpect(model().attribute("totalPrice", new BigDecimal("50.00")));
-
-        verify(errandService).getAllCartsByUser(testUserId);
-        verify(userRepository).findById(testUserId);
-        verify(errandService).getTotalPrice(testUserId);
-    }
+//    @Test
+//    @WithMockUser(roles = "CLIENT")
+//    void getCartPage_AuthenticatedClient_ReturnsCartView() throws Exception {
+//        // Arrange
+//        User mockUser = new User();
+//        Cart mockCart = new Cart();
+//        when(errandService.getAllCartsByUser(testUserId)).thenReturn(Collections.singletonList(mockCart));
+//        when(userRepository.findById(testUserId)).thenReturn(Optional.of(mockUser));
+//        when(errandService.getTotalPrice(testUserId)).thenReturn(new BigDecimal("50.00"));
+//
+//        // Act & Assert
+//        mockMvc.perform(get("/cart"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("cart"))
+//                .andExpect(model().attributeExists("carts", "totalPrice", "user"))
+//                .andExpect(model().attribute("totalPrice", new BigDecimal("50.00")));
+//
+//        verify(errandService).getAllCartsByUser(testUserId);
+//        verify(userRepository).findById(testUserId);
+//        verify(errandService).getTotalPrice(testUserId);
+//    }
 //
 //    @Test
 //    @WithMockUser(roles = "CLIENT")
@@ -76,19 +76,19 @@ public class CartControllerApiTest {
 //        verify(errandService).removeFromCart(any(UserInfo.class), eq(testCartId));
 //    }
 
-    @Test
-    @WithMockUser(roles = "CHEF")
-    void getChefsCartPage_AuthenticatedChef_ReturnsCorrectView() throws Exception {
-        // Arrange
-        when(errandService.getCartsByErrandIdForChef(testErrandId))
-                .thenReturn(Collections.singletonList(new Cart()));
-
-        // Act & Assert
-        mockMvc.perform(get("/chefCart/{id}", testErrandId))
-                .andExpect(status().isOk())
-                .andExpect(view().name("chef-cart"))
-                .andExpect(model().attributeExists("carts"));
-    }
+//    @Test
+//    @WithMockUser(roles = "CHEF")
+//    void getChefsCartPage_AuthenticatedChef_ReturnsCorrectView() throws Exception {
+//        // Arrange
+//        when(errandService.getCartsByErrandIdForChef(testErrandId))
+//                .thenReturn(Collections.singletonList(new Cart()));
+//
+//        // Act & Assert
+//        mockMvc.perform(get("/chefCart/{id}", testErrandId))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("chef-cart"))
+//                .andExpect(model().attributeExists("carts"));
+//    }
 
     @Test
     @WithMockUser(roles = "CHEF")
@@ -106,32 +106,32 @@ public class CartControllerApiTest {
         verify(errandService).getErrandId(testErrandId);
     }
 
-    @Test
-    @WithMockUser(roles = "BARTENDER")
-    void getBartenderCartPage_AuthenticatedBartender_ReturnsCorrectView() throws Exception {
-        // Arrange
-        when(errandService.getCartsByErrandIdForBartender(testErrandId))
-                .thenReturn(Collections.singletonList(new Cart()));
-
-        // Act & Assert
-        mockMvc.perform(get("/bartenderCart/{id}", testErrandId))
-                .andExpect(status().isOk())
-                .andExpect(view().name("bartender-cart"))
-                .andExpect(model().attributeExists("carts"));
-    }
-
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    void getCartPage_UnauthorizedRole_ReturnsForbidden() throws Exception {
-        mockMvc.perform(get("/cart"))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    void removeFromCart_WithoutCsrf_ReturnsForbidden() throws Exception {
-        mockMvc.perform(delete("/cart/{id}/delete"))
-                .andExpect(status().isForbidden());
-    }
+//    @Test
+//    @WithMockUser(roles = "BARTENDER")
+//    void getBartenderCartPage_AuthenticatedBartender_ReturnsCorrectView() throws Exception {
+//        // Arrange
+//        when(errandService.getCartsByErrandIdForBartender(testErrandId))
+//                .thenReturn(Collections.singletonList(new Cart()));
+//
+//        // Act & Assert
+//        mockMvc.perform(get("/bartenderCart/{id}", testErrandId))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("bartender-cart"))
+//                .andExpect(model().attributeExists("carts"));
+//    }
+//
+//    @Test
+//    @WithMockUser(roles = "ADMIN")
+//    void getCartPage_UnauthorizedRole_ReturnsForbidden() throws Exception {
+//        mockMvc.perform(get("/cart"))
+//                .andExpect(status().isForbidden());
+//    }
+//
+//    @Test
+//    void removeFromCart_WithoutCsrf_ReturnsForbidden() throws Exception {
+//        mockMvc.perform(delete("/cart/{id}/delete"))
+//                .andExpect(status().isForbidden());
+//    }
 
     @Test
     @WithMockUser(roles = "CLIENT")

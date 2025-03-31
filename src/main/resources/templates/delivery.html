@@ -41,8 +41,9 @@
                 <h1 class="sitename">ресторант <span style="color: darkgoldenrod;">Вистоди</span></h1>
             </a>
 
-            <div class="ms-auto d-flex gap-2">
+            <div class="ms-auto d-flex gap-3">
                 <a th:href="@{/delivery}" class="cta-btn">Опресни</a>
+                <a th:if="${!session.isEmpty()}" class="logout" href="/logout">Излез</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

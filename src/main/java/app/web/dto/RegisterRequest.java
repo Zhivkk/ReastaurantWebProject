@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest { //DTO - Получава информацията от HTML формата
+public class RegisterRequest {
 
     @Size(min = 6, message = "Username must be at least 6 symbols")
     private String username;

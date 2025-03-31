@@ -205,141 +205,56 @@
         </div>
 
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
-<!-- Начало на блока
- Ще се направят множество такива блокове, според филтрите по-горе. Данните ще бъдат в отделни спицъци, подадени от контролера.
- В блока ще се обхождат списъците и ще се визуализират със снимки и име, цена и описание-->
 
           <div th:each=" soup: ${soups}" class="col-lg-6 menu-item isotope-item filter-soup">
-            <img th:src="${soup.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${soup.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${soup.id} + '/product-details'}" th:text="${soup.getProductName()}"></a><span th:text="${soup.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${soup.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
           <div th:each="salad : ${salads}" class="col-lg-6 menu-item isotope-item filter-salad">
-            <img th:src="${salad.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${salad.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${salad.id} + '/product-details'}" th:text="${salad.getProductName()}"></a><span th:text="${salad.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${salad.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div> <!-- това е описанието -->
 
           <div th:each="appetizer : ${appetizers}" class="col-lg-6 menu-item isotope-item filter-appetizer">
-            <img th:src="${appetizer.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${appetizer.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${appetizer.id} + '/product-details'}" th:text="${appetizer.getProductName()}"></a><span th:text="${appetizer.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${appetizer.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
           <div th:each="mainCourse : ${mainCourses}" class="col-lg-6 menu-item isotope-item filter-main_course">
-            <img th:src="${mainCourse.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${mainCourse.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${mainCourse.id} + '/product-details'}" th:text="${mainCourse.getProductName()}"></a><span th:text="${mainCourse.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${mainCourse.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
           <div th:each="dessert : ${desserts}" class="col-lg-6 menu-item isotope-item filter-dessert">
-            <img th:src="${dessert.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${dessert.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${dessert.id} + '/product-details'}" th:text="${dessert.getProductName()}"></a><span th:text="${dessert.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${dessert.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
           <div th:each="softDrink : ${softDrinks}" class="col-lg-6 menu-item isotope-item filter-soft_drink">
-            <img th:src="${softDrink.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${softDrink.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${softDrink.id} + '/product-details'}" th:text="${softDrink.getProductName()}"></a><span th:text="${softDrink.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${softDrink.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
           <div th:each="alcohol : ${alcohols}" class="col-lg-6 menu-item isotope-item filter-alcohol">
-            <img th:src="${alcohol.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${alcohol.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${alcohol.id} + '/product-details'}" th:text="${alcohol.getProductName()}"></a><span th:text="${alcohol.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${alcohol.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
           <div th:each="other : ${others}" class="col-lg-6 menu-item isotope-item filter-other">
-            <img th:src="${other.getPicture()}" class="menu-img" alt=""> <!-- тук е пътят към снимката -->
+            <img th:src="${other.getPicture()}" class="menu-img" alt="">
             <div class="menu-content"><a th:href="@{'/products/' + ${other.id} + '/product-details'}" th:text="${other.getProductName()}"></a><span th:text="${other.getPrice()+' лв.'}"></span></div> <!-- това е името и цената-->
             <div class="menu-ingredients", th:text="${other.getDescription()}">Тук трябва да са изредени продуктите, а не описанието</div>
           </div>
 
-          <!-- Menu Item -->
 
-<!--          <div class="col-lg-6 menu-item isotope-item filter-specialty">-->
-<!--            <img src="/assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Bread Barrel</a><span>$6.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Lorem, deren, trataro, filede, nerada-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-starters">-->
-<!--            <img src="/assets/img/menu/cake.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Crab Cake</a><span>$7.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              A delicate crab cake served on a toasted roll with lettuce and tartar sauce-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-salads">-->
-<!--            <img src="/assets/img/menu/caesar.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Caesar Selections</a><span>$8.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Lorem, deren, trataro, filede, nerada-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-specialty">-->
-<!--            <img src="/assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Tuscan Grilled</a><span>$9.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Grilled chicken with provolone, artichoke hearts, and roasted red pesto-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-starters">-->
-<!--            <img src="/assets/img/menu/mozzarella.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Mozzarella Stick</a><span>$4.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Lorem, deren, trataro, filede, nerada-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-salads">-->
-<!--            <img src="/assets/img/menu/greek-salad.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Greek Salad</a><span>$9.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Fresh spinach, crisp romaine, tomatoes, and Greek olives-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-salads">-->
-<!--            <img src="/assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Spinach Salad</a><span>$9.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--          <div class="col-lg-6 menu-item isotope-item filter-specialty">-->
-<!--            <img src="/assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">-->
-<!--            <div class="menu-content">-->
-<!--              <a href="#">Lobster Roll</a><span>$12.95</span>-->
-<!--            </div>-->
-<!--            <div class="menu-ingredients">-->
-<!--              Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; Menu Item &ndash;&gt;-->
-
-<!--        </div>&lt;!&ndash; Menu Container &ndash;&gt;-->
 
         </div>
       </div>
@@ -582,55 +497,6 @@
       </div>
 
     </section><!-- /Events Section -->
-
-    <!-- Book A Table Section -->
-<!--    <section id="book-a-table" class="book-a-table section">-->
-
-<!--      &lt;!&ndash; Section Title &ndash;&gt;-->
-<!--      <div class="container section-title" data-aos="fade-up">-->
-<!--        <h2>РЕЗЕРВАЦИИ</h2>-->
-<!--        <h1><a th:href="@{/reservation}">Запази маса</a></h1>-->
-<!--      </div>&lt;!&ndash; End Section Title &ndash;&gt;-->
-
-<!--&lt;!&ndash;      <div class="container" data-aos="fade-up" data-aos-delay="100">&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <form th:action="@{/reservation}" th:method="post" role="form" class="php-email-form">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class="row gy-4">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-4 col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <input th:value="${user.getUsername()}" type="text" name="userName" class="form-control" id="userName" placeholder="Your Name" required="">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-4 col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <input th:value="${user.getEmail()}" type="email" class="form-control" name="userEmail" id="userEmail" placeholder="Your Email" required="">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-4 col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <input th:value="${user.getPhone()}" type="text" class="form-control" name="userPhone" id="userPhone" placeholder="Your Phone" required="">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-4 col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <input type="date" name="date" class="form-control" id="date" placeholder="Date" required="">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-4 col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <input type="number" class="form-control" name="guests" id="guests" placeholder="guests" required="">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;            <div class="col-lg-4 col-md-6">&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;              <input type="text" class="form-control" name="message" id="message" placeholder="message" required="">&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <div class="form-group mt-3">&ndash;&gt;-->
-<!--&lt;!&ndash;            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <div class="text-center mt-3">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="loading">Loading</div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="error-message"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="submit">Book a Table</button>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </form>&lt;!&ndash; End Reservation Form &ndash;&gt;&ndash;&gt;-->
-
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-
-<!--    </section>&lt;!&ndash; /Book A Table Section &ndash;&gt;-->
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section">
@@ -934,34 +800,6 @@
 
           </div>
 
-<!--          <div class="col-lg-8">-->
-<!--            <form action="/send/email" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">-->
-<!--              <div class="row gy-4">-->
-
-<!--                <div class="col-md-6">-->
-<!--                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">-->
-<!--                </div>-->
-
-<!--                <div class="col-md-6 ">-->
-<!--                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">-->
-<!--                </div>-->
-
-<!--                <div class="col-md-12">-->
-<!--                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">-->
-<!--                </div>-->
-
-<!--                <div class="col-md-12">-->
-<!--                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>-->
-<!--                </div>-->
-
-<!--                <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">-->
-<!--                  <a th:href="@{/contact}" class="cta-btn">Изпрати съобщение</a>-->
-<!--                </div>-->
-
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>&lt;!&ndash; End Contact Form &ndash;&gt;-->
-
         </div>
 
       </div>
@@ -984,63 +822,8 @@
             <p class="mt-3"><strong>Phone:</strong> <span>+358 888 88 88 88</span></p>
             <p><strong>Email:</strong> <span>contact@example.com</span></p>
           </div>
-          <!--
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
 
-        </div>
-
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Полезни връзки</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="/forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Restaurantly</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-         All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-
-
-      </div>
+             </div>
     </div>
     </div>
   </footer>

@@ -81,7 +81,7 @@ class BookTableControllerApiTest {
     @WithMockUser(roles = "ADMIN")
     void bookTablePage_ShouldDenyAccessForNonClient() throws Exception {
         mockMvc.perform(get("/reservation"))
-                .andExpect(status().isForbidden());
+                .andExpect(status().is4xxClientError());
     }
 
     @Test

@@ -2,7 +2,6 @@ package app.Errand;
 
 
 import app.APIMessage.MailClient;
-import app.APIMessage.MailRequest;
 import app.Cart.Cart;
 import app.Cart.CartRepository;
 import app.Product.Product;
@@ -14,12 +13,10 @@ import app.User.repository.UserRepository;
 import app.web.dto.AddCartRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -149,33 +146,20 @@ public class ErrandService {
 
         List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION);
         List<Errand> errandsFiltered = new ArrayList<>();
-        Boolean isReadyForAdd = false;
-
-//        TODO for is to stay same
 
         for (Errand errand : errands) {
             List<Cart> carts = errand.getCarts();
             for (Cart cart : carts) {
-                if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SOUP)) {
-                    isReadyForAdd = true;
-                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.APPETIZER)) {
-                    isReadyForAdd = true;
-                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.MAIN_COURSE)) {
-                    isReadyForAdd = true;
-                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.DESSERT)) {
-                    isReadyForAdd = true;
-                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.OTHER)) {
-                    isReadyForAdd = true;
-                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SPECIALS)) {
-                    isReadyForAdd = true;
-                }else if (cart.getIsReady().equals(false) && cart.getProduct().getProductCategory().equals(ProductCategory.SALLAD)) {
-                    isReadyForAdd = true;
+                if (cart.getIsReady().equals(false)) {
+                    if (!cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
+                            && !cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)) {
+                        errandsFiltered.add(errand);
+                    }
                 }
-            }
-            if (isReadyForAdd) {errandsFiltered.add(errand);}
 
-            isReadyForAdd = false;
+            }
         }
+
         return errandsFiltered;
 
     }
@@ -228,17 +212,6 @@ public class ErrandService {
         }
         return errandsFiltered;
 
-
-
-//        List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION).stream()
-//                .filter(errand -> errand.getCarts().stream()
-//                        .anyMatch(cart -> cart.getIsReady().equals(false)))
-//                .filter(errand -> errand.getCarts().stream()
-//                        .anyMatch(cart -> cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
-//                                    || cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)))
-//                .toList();
-//
-
     }
 
     public List<Cart> getCartsByErrandIdForBartender(UUID id) {
@@ -252,7 +225,6 @@ public class ErrandService {
                 .toList();
 
         return carts;
-
     }
 
     public String getErrandId(UUID id) {
@@ -263,10 +235,7 @@ public class ErrandService {
     }
 
     public List<Errand> getAllErrandsForDeliverry() {
-
-        List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_DELIVERY);
-
-        return errands;
+        return errandRepository.findByErrandStatus(ErrandStatus.FOR_DELIVERY);
     }
 
     public void finishDeliverryStatus(UUID id) {

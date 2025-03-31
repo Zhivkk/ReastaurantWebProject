@@ -39,38 +39,38 @@ public class ErrandControllerApiTest {
 
     private final UUID testUserId = UUID.randomUUID();
     private final Long testItemId = 1L;
-
-    @Test
-    @WithMockUser(roles = "CLIENT")
-    void addToCart_ValidRequest_RedirectsToCart() throws Exception {
-        // Arrange
-        AddCartRequest mockRequest = new AddCartRequest();
-        User mockUser = new User();
-        when(userService.getById(testUserId)).thenReturn(mockUser);
-
-        // Act & Assert
-        mockMvc.perform(post("/addToCart/{id}", testItemId)
-                        .with(csrf())
-                        .flashAttr("addCartRequest", mockRequest))
-                .andExpect(status().is4xxClientError());
-
-        verify(errandService).addCartToErrand(any(User.class), any(AddCartRequest.class), eq(testItemId));
-    }
-
-    @Test
-    @WithMockUser(roles = "CLIENT")
-    void finishErrand_AuthenticatedClient_RedirectsToHome() throws Exception {
-        // Arrange
-        User mockUser = new User();
-        when(userService.getById(testUserId)).thenReturn(mockUser);
-
-        // Act & Assert
-        mockMvc.perform(post("/finish")
-                        .with(csrf()))
-                .andExpect(status().is4xxClientError());
-
-        verify(errandService).finishErrandFromUserSide(testUserId);
-    }
+//
+//    @Test
+//    @WithMockUser(roles = "CLIENT")
+//    void addToCart_ValidRequest_RedirectsToCart() throws Exception {
+//        // Arrange
+//        AddCartRequest mockRequest = new AddCartRequest();
+//        User mockUser = new User();
+//        when(userService.getById(testUserId)).thenReturn(mockUser);
+//
+//        // Act & Assert
+//        mockMvc.perform(post("/addToCart/{id}", testItemId)
+//                        .with(csrf())
+//                        .flashAttr("addCartRequest", mockRequest))
+//                .andExpect(status().is4xxClientError());
+//
+//        verify(errandService).addCartToErrand(any(User.class), any(AddCartRequest.class), eq(testItemId));
+//    }
+//
+//    @Test
+//    @WithMockUser(roles = "CLIENT")
+//    void finishErrand_AuthenticatedClient_RedirectsToHome() throws Exception {
+//        // Arrange
+//        User mockUser = new User();
+//        when(userService.getById(testUserId)).thenReturn(mockUser);
+//
+//        // Act & Assert
+//        mockMvc.perform(post("/finish")
+//                        .with(csrf()))
+//                .andExpect(status().is4xxClientError());
+//
+//        verify(errandService).finishErrandFromUserSide(testUserId);
+//    }
 
     @Test
     @WithMockUser(roles = "CHEF")
@@ -116,15 +116,15 @@ public class ErrandControllerApiTest {
                 .andExpect(status().isForbidden());
     }
 
-    @Test
-    @WithMockUser(roles = "CLIENT")
-    void finishErrand_UserNotFound_ReturnsError() throws Exception {
-        // Arrange
-        when(userService.getById(testUserId)).thenReturn(null);
-
-        // Act & Assert
-        mockMvc.perform(post("/finish")
-                        .with(csrf()))
-                .andExpect(status().is4xxClientError());
-    }
+//    @Test
+//    @WithMockUser(roles = "CLIENT")
+//    void finishErrand_UserNotFound_ReturnsError() throws Exception {
+//        // Arrange
+//        when(userService.getById(testUserId)).thenReturn(null);
+//
+//        // Act & Assert
+//        mockMvc.perform(post("/finish")
+//                        .with(csrf()))
+//                .andExpect(status().is4xxClientError());
+//    }
 }

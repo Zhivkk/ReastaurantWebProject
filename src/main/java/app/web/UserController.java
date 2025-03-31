@@ -3,7 +3,6 @@ package app.web;
 import app.Security.UserInfo;
 import app.User.model.User;
 import app.User.service.UserService;
-import app.web.dto.RegisterRequest;
 import app.web.dto.UserEditRequest;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

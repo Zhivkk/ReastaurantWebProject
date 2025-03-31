@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +68,6 @@ public class UserService implements UserDetailsService {
                 userRepository.save(user);
         log.info("Successfully create new user account for username [%s] and id [%s]".formatted(user.getUsername(), user.getId()));
 
-        //Изпращане на имейл за успешна регистрация
         MailRequest mailRequest = MailRequest.builder()
                 .recipient(user.getEmail())
                 .subject("Account activation")

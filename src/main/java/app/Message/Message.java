@@ -3,7 +3,6 @@ package app.Message;
 import app.User.model.User;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,14 +12,14 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message { //// изпращане на съобщение от потребителя до системата и отговор
+public class Message {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
-    private User user; // името на клиента (логнатия в системата)
+    private User user;
 
     @Column (nullable = false)
     private String subject;
@@ -29,7 +28,7 @@ public class Message { //// изпращане на съобщение от по
     private String messageText;
 
     @Enumerated(EnumType.STRING)
-    private MessageStaus messageStatus; //written, read, replied, deleted
+    private MessageStaus messageStatus;
 
     private LocalDateTime createdOn;
 

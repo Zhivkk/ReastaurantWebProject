@@ -1,9 +1,7 @@
 package app.web;
 
-import app.exception.NotificationServiceFeignCallException;
 import app.exception.UserDontExistException;
 import app.exception.UsernameAlreadyExistException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MissingRequestValueException;

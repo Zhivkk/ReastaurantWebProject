@@ -4,7 +4,6 @@ import app.Cart.Cart;
 import app.User.model.User;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,14 +16,14 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Errand { // описва поръчката
+public class Errand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
-    private User user; // името на клиента (логнатия в системата)
+    private User user;
 
     @Enumerated(EnumType.STRING)
     @Column (nullable = false)
@@ -34,13 +33,13 @@ public class Errand { // описва поръчката
     @OrderBy("createdOn DESC")
     private List<Cart> carts = new ArrayList<>();
 
-    private BigDecimal price; // обща цена за поръчката
+    private BigDecimal price;
 
-    private String addressForDelivery; // може да се раздели на отделни позиции – град, квартал, улица ....
+    private String addressForDelivery;
 
-    private int tableNumber; // номер на масата (когато се обслужва от сервитьор)
+    private int tableNumber;
 
-    private String note; //Коментар
+    private String note;
 
     private LocalDateTime createdOn;
 

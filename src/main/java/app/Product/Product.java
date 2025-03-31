@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.*;
@@ -27,18 +26,18 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     @Column (nullable = false)
-    private ProductCategory productCategory; // soup, salad, appetizer, main course, dessert, soft drink, alcohol, others (енумерация)
+    private ProductCategory productCategory;
 
-    private String description; // Кратко описание на продукта
+    private String description;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<ProductIngredient> productIngredients = new ArrayList<>();// съдържа рецептата за продукта (съставка/количество)
+    private List<ProductIngredient> productIngredients = new ArrayList<>();
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String preparation; // начин на приготвяне;
+    private String preparation;
 
-    private Double grammage; // количество на една порция
+    private Double grammage;
 
     private BigDecimal price;
 
@@ -46,7 +45,7 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     @Column (nullable = false)
-    private ProductStatus productStatus; // available, out of stock,    (енумерация)
+    private ProductStatus productStatus;
 
     @CreationTimestamp
     @Column(updatable = false)

@@ -64,15 +64,12 @@ public class DataLoader implements CommandLineRunner {
         String url = GITHUB_RAW_URL + "product_ingredients.json";
         String json = restTemplate.getForObject(url, String.class);
 
-        // Парсиране на JSON-а към списък от DTO обекти
         List<ProductIngredientDTO> dtoList = objectMapper.readValue(json, new TypeReference<>() {});
 
-        // Преобразуване на DTO обектите към ProductIngredient
         for (ProductIngredientDTO dto : dtoList) {
             ProductIngredient pi = new ProductIngredient();
             pi.setQuantity(dto.getQuantity());
 
-            // Зареждане на продукт и съставка от базата
             Product product = productRepository.findById(dto.getProductId()).orElseThrow(() -> new RuntimeException("Product not found: " + dto.getProductId()));
             pi.setProduct(product);
 
