@@ -9,12 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
 import java.util.UUID;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -32,13 +27,11 @@ public class UserControllerApiTest {
     @Test
     void putUnauthorizedRequestToSwitchRole_shouldReturn404AndNotFoundView() throws Exception {
 
-        // 1. Build Request
         UserInfo principal = new UserInfo(UUID.randomUUID(), "User123", "123123", UserRole.CLIENT, true);
         MockHttpServletRequestBuilder request = put("/users/{id}/role", UUID.randomUUID())
                 .with(user(principal))
                 .with(csrf());
 
-        // 2. Send Request
         mockMvc.perform(request)
                 .andExpect(status().isNotFound())
                 .andExpect(view().name("not-found"));

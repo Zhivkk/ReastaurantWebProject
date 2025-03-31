@@ -4,10 +4,9 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Optional;
 import java.util.UUID;
-
 import app.APIMessage.MailClient;
 import app.APIMessage.MailRepository;
-import app.APIMessage.MailRequest; // Ensure public constructor or provide factory method for creating MailRequest
+import app.APIMessage.MailRequest;
 import app.APIMessage.MailService;
 import app.Security.UserInfo;
 import app.User.model.User;
@@ -31,7 +30,7 @@ public class MailServiceUTest {
     private MailRepository mailRepository;
 
     @InjectMocks
-    private MailService mailService;  // Assuming your class is named MailService
+    private MailService mailService;
 
     private UserInfo userInfo;
     private MailRequest mailRequest;
@@ -50,13 +49,13 @@ public class MailServiceUTest {
 
     @Test
     void sendMail_ShouldSendMailAndSaveMailEntity() {
-        // Arrange
+
         when(userRepository.findById(userInfo.getUserId())).thenReturn(Optional.of(user));
 
-        // Act
+
         mailService.sendMail(userInfo, mailRequest);
 
-        // Assert
+
         verify(mailClient).sendMail(mailRequest);
         verify(mailRepository).save(argThat(mail ->
                 mail.getRecipient().equals(user.getEmail()) &&
@@ -68,10 +67,9 @@ public class MailServiceUTest {
 
     @Test
     void sendMail_ShouldThrowException_WhenUserNotFound() {
-        // Arrange
+
         when(userRepository.findById(userInfo.getUserId())).thenReturn(Optional.empty());
 
-        // Act & Assert
         assertThrows(UserDontExistException.class, () ->
                 mailService.sendMail(userInfo, mailRequest)
         );

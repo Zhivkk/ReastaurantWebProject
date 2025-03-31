@@ -11,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
@@ -35,7 +34,7 @@ public class HomeControllerApiTest {
 
     @Test
     void getHomePage_ShouldReturnCorrectModelAndView() {
-        // Arrange
+
         UUID userId = UUID.randomUUID();
         UserInfo userInfo = mock(UserInfo.class);
         User mockUser = new User();
@@ -48,16 +47,15 @@ public class HomeControllerApiTest {
             when(productRepository.findByProductCategory(category)).thenReturn(mockProducts);
         }
 
-        // Act
+
         ModelAndView result = homeController.getHomePage(userInfo);
 
-        // Assert
+
         assertAll(
                 () -> assertEquals("home", result.getViewName()),
                 () -> assertSame(mockUser, result.getModel().get("user"))
         );
 
-        // Verify interactions
         verify(userService).getById(userId);
         for (ProductCategory category : ProductCategory.values()) {
             verify(productRepository).findByProductCategory(category);
@@ -68,7 +66,7 @@ public class HomeControllerApiTest {
 
     @Test
     void getHomePage_ShouldHandleEmptyProductLists() {
-        // Arrange
+
         UUID userId = UUID.randomUUID();
         UserInfo userInfo = mock(UserInfo.class);
         when(userInfo.getUserId()).thenReturn(userId);
@@ -76,10 +74,10 @@ public class HomeControllerApiTest {
 
         when(productRepository.findByProductCategory(any())).thenReturn(Collections.emptyList());
 
-        // Act
+
         ModelAndView result = homeController.getHomePage(userInfo);
 
-        // Assert
+
         assertAll(
                 () -> assertTrue(((List<?>) result.getModel().get("soups")).isEmpty()),
                 () -> assertTrue(((List<?>) result.getModel().get("specials")).isEmpty())

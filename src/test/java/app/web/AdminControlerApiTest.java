@@ -8,16 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import java.util.Arrays;
 import java.util.UUID;
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -28,7 +24,7 @@ class AdminControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private UserService userService; // Mock dependency
+    private UserService userService;
 
     private UUID userId;
     private User testUser;
@@ -42,7 +38,7 @@ class AdminControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN") // Simulate an ADMIN user
+    @WithMockUser(roles = "ADMIN")
     void shouldReturnAdminPage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/admin"))
                 .andExpect(status().isOk())

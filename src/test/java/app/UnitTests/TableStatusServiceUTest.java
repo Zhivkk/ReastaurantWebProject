@@ -24,7 +24,7 @@ class TableStatusServiceTest {
 
     @Test
     void fetchAllReservations_ReturnsListFromClient() {
-        // Given
+
         List<TableDTO> expectedReservations = List.of(
                 new TableDTO(),
                 new TableDTO()
@@ -32,33 +32,33 @@ class TableStatusServiceTest {
 
         when(reservationClient.getAllReservations()).thenReturn(expectedReservations);
 
-        // When
+
         List<TableDTO> result = tableStatusService.fetchAllReservations();
 
-        // Then
+
         verify(reservationClient, times(1)).getAllReservations();
         assertEquals(expectedReservations, result);
     }
 
     @Test
     void fetchAllReservations_WhenClientReturnsEmptyList_ReturnsEmptyList() {
-        // Given
+
         when(reservationClient.getAllReservations()).thenReturn(Collections.emptyList());
 
-        // When
+
         List<TableDTO> result = tableStatusService.fetchAllReservations();
 
-        // Then
+
         assertTrue(result.isEmpty());
         verify(reservationClient, times(1)).getAllReservations();
     }
 
     @Test
     void fetchAllReservations_WhenClientThrowsException_PropagatesException() {
-        // Given
+
         when(reservationClient.getAllReservations()).thenThrow(new RuntimeException("API Error"));
 
-        // When & Then
+
         assertThrows(RuntimeException.class,
                 () -> tableStatusService.fetchAllReservations()
         );

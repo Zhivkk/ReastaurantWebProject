@@ -6,7 +6,6 @@ import app.Errand.Errand;
 import app.Errand.ErrandService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,12 +31,11 @@ public class DeliveryControllerApiTest {
     @Test
     @WithMockUser(roles = "SUPPLIER")
     void deliveryPage_ShouldReturnErrandsList() throws Exception {
-        // Arrange
+
         Errand mockErrand = new Errand();
         when(errandService.getAllErrandsForDeliverry())
                 .thenReturn(Collections.singletonList(mockErrand));
 
-        // Act & Assert
         mockMvc.perform(get("/delivery"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("delivery"))
@@ -50,7 +48,7 @@ public class DeliveryControllerApiTest {
     @Test
     @WithMockUser(roles = "SUPPLIER")
     void finishDelivery_ValidRequest_ShouldRedirect() throws Exception {
-        // Act & Assert
+
         mockMvc.perform(put("/delivery/{id}/finish", testErrandId)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
@@ -76,11 +74,10 @@ public class DeliveryControllerApiTest {
     @Test
     @WithMockUser(roles = "SUPPLIER")
     void finishDelivery_WithInvalidId_ShouldProcessCorrectly() throws Exception {
-        // Arrange
+
         UUID invalidId = UUID.randomUUID();
         doNothing().when(errandService).finishDeliverryStatus(invalidId);
 
-        // Act & Assert
         mockMvc.perform(put("/delivery/{id}/finish", invalidId)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection());

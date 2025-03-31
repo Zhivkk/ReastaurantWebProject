@@ -24,7 +24,7 @@ class ReservationServiceTest {
 
     @Test
     void addUserInfo_WithValidId_ReturnsReservationRequestWithUserData() {
-        // Given
+
         UUID userId = UUID.randomUUID();
         User mockUser = User.builder()
                 .phone("0888123456")
@@ -34,10 +34,10 @@ class ReservationServiceTest {
 
         when(userService.getById(userId)).thenReturn(mockUser);
 
-        // When
+
         ReservationRequest result = reservationService.addUserInfo(userId);
 
-        // Then
+
         verify(userService, times(1)).getById(userId); // Проверка дали userService.getById() се вика точно веднъж
         assertNotNull(result);
         assertEquals("0888123456", result.getUserPhone());

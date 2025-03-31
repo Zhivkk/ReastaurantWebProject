@@ -2,14 +2,11 @@ package app.UnitTests;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 import app.Ingredient.Ingredient;
-import app.Ingredient.IngredientRepository;
 import app.Product.Product;
 import app.Product.ProductRepository;
 import app.Product.ProductService;
 import app.ProductIngredient.ProductIngredient;
-import app.ProductIngredient.ProductIngredientRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,43 +21,37 @@ class ProductServiceUTest {
     @Mock
     private ProductRepository productRepository;
 
-    @Mock
-    private ProductIngredientRepository productIngredientRepository;
-
-    @Mock
-    private IngredientRepository ingredientRepository;
-
     @InjectMocks
     private ProductService productService;
 
     @Test
     void getById_ValidId_ReturnsProduct() {
-        // Arrange
+
         Long productId = 1L;
         Product mockProduct = new Product();
         when(productRepository.findById(productId)).thenReturn(Optional.of(mockProduct));
 
-        // Act
+
         Product result = productService.getById(productId);
 
-        // Assert
+
         assertThat(result).isEqualTo(mockProduct);
     }
 
     @Test
     void getById_InvalidId_ThrowsException() {
-        // Arrange
+
         Long invalidId = 999L;
         when(productRepository.findById(invalidId)).thenReturn(Optional.empty());
 
-        // Act & Assert
+
         assertThatThrownBy(() -> productService.getById(invalidId))
                 .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void getProductIngredients_ValidProduct_ReturnsIngredientsList() {
-        // Arrange
+
         Long productId = 1L;
         Product mockProduct = new Product();
         mockProduct.setId(productId);
@@ -79,16 +70,16 @@ class ProductServiceUTest {
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(mockProduct));
 
-        // Act
+
         String result = productService.getProductIngredients(productId);
 
-        // Assert
+
         assertThat(result).isEqualTo("Salt, Sugar, ");
     }
 
     @Test
     void getProductIngredients_NoIngredients_ReturnsEmptyString() {
-        // Arrange
+
         Long productId = 1L;
         Product mockProduct = new Product();
         mockProduct.setId(productId);
@@ -96,20 +87,20 @@ class ProductServiceUTest {
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(mockProduct));
 
-        // Act
+
         String result = productService.getProductIngredients(productId);
 
-        // Assert
+
         assertThat(result).isEmpty();
     }
 
     @Test
     void getProductIngredients_ProductNotFound_ThrowsException() {
-        // Arrange
+
         Long invalidId = 999L;
         when(productRepository.findById(invalidId)).thenReturn(Optional.empty());
 
-        // Act & Assert
+
         assertThatThrownBy(() -> productService.getProductIngredients(invalidId))
                 .isInstanceOf(RuntimeException.class);
     }

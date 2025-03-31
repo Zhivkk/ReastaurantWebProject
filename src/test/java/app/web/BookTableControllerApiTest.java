@@ -12,10 +12,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,14 +37,13 @@ class BookTableControllerApiTest {
     @Test
     @WithMockUser(roles = "CLIENT")
     void bookTablePage_ShouldReturnModelWithReservationRequest() throws Exception {
-        // Arrange
+
         UUID userId = UUID.randomUUID();
         UserInfo userInfo = new UserInfo(userId, "user", "password", UserRole.CLIENT, true);
         ReservationRequest mockRequest = new ReservationRequest();
 
         when(reservationService.addUserInfo(any(UUID.class))).thenReturn(mockRequest);
 
-        // Act & Assert
         mockMvc.perform(get("/reservation")
                         .with(SecurityMockMvcRequestPostProcessors.user(userInfo)))
                 .andExpect(status().isOk())
@@ -59,13 +56,12 @@ class BookTableControllerApiTest {
     @Test
     @WithMockUser(roles = "CLIENT")
     void makeReservation_ShouldRedirectToHome() throws Exception {
-        // Arrange
+
         ReservationRequest request = new ReservationRequest();
         request.setDate(LocalDate.now());
         request.setGuests(4);
         request.setMessage("Window seat");
 
-        // Act & Assert
         mockMvc.perform(post("/reservation")
                         .param("dateTime", request.getDate().toString())
                         .param("numberOfPeople", String.valueOf(request.getGuests()))

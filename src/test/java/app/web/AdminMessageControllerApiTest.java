@@ -38,7 +38,6 @@ class AdminMessageControllerApiTest {
         }
     }
 
-    // ---------------------- UserListPage() ----------------------
     @Test
     @WithMockUser(roles = "ADMIN")
     void getMessageList_authorized_returnsMessageList() throws Exception {
@@ -65,14 +64,12 @@ class AdminMessageControllerApiTest {
                 .andExpect(redirectedUrlPattern("**/login"));
     }
 
-    // ---------------------- MessageFromUser() ----------------------
     @Test
     @WithMockUser(roles = "ADMIN")
     void getMessageDetails_validId_returnsMessageView() throws Exception {
         Message mockMessage = new Message();
         String mockEmail = "user@example.com";
 
-        // Мокване за произволни UUID стойности
         when(messageService.getMessageById(any(UUID.class))).thenReturn(mockMessage);
         when(messageService.getUserEmail(any(UUID.class))).thenReturn(mockEmail);
 
@@ -82,7 +79,6 @@ class AdminMessageControllerApiTest {
                 .andExpect(model().attribute("message", mockMessage))
                 .andExpect(model().attribute("email", mockEmail));
 
-        // Допълнителна проверка за подадените параметри
         verify(messageService).getMessageById(testMessageId);
         verify(messageService).getUserEmail(testMessageId);
     }

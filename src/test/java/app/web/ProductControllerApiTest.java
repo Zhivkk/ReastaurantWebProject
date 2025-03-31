@@ -14,10 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.Optional;
 import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -38,7 +36,7 @@ public class ProductControllerApiTest {
 
     @Test
     void getProductPage_ReturnsCorrectModelAndView() {
-        // Arrange
+
         Long productId = 1L;
         UUID userId = UUID.randomUUID();
         UserInfo userInfo = new UserInfo(userId, "test@example.com", "ROLE_USER", UserRole.CLIENT, true);
@@ -53,10 +51,8 @@ public class ProductControllerApiTest {
         when(productService.getProductIngredients(productId)).thenReturn(ingredients);
         when(userRepository.findById(userId)).thenReturn(Optional.of(mockUser));
 
-        // Act
         ModelAndView result = productController.getProductPage(productId, userInfo);
 
-        // Assert
         assertEquals("product-details", result.getViewName());
 
         assertAll(
