@@ -53,7 +53,6 @@
             <div class="ms-auto d-flex gap-3">
                 <a style="color: goldenrod" th:if="${!session.isEmpty()}" class="logout" href="/home#menu">Продължете с поръчката</a>
                 <a style="color: goldenrod" th:if="${totalPrice <= user.getAccountAmount()}" th:href="@{/finish}" class="cta-btn">Поръчай</a>
-                <a style="color: goldenrod" th:href="@{/home#menu}" class="cta-btn">Откажи</a>
             </div>
             <nav id="navmenu" class="navmenu">
                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

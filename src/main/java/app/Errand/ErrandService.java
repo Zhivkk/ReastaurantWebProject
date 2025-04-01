@@ -146,6 +146,7 @@ public class ErrandService {
 
         List<Errand> errands = errandRepository.findByErrandStatus(ErrandStatus.FOR_EXECUTION);
         List<Errand> errandsFiltered = new ArrayList<>();
+        Boolean isReadyForAdd = false;
 
         for (Errand errand : errands) {
             List<Cart> carts = errand.getCarts();
@@ -153,11 +154,14 @@ public class ErrandService {
                 if (cart.getIsReady().equals(false)) {
                     if (!cart.getProduct().getProductCategory().equals(ProductCategory.ALCOHOL)
                             && !cart.getProduct().getProductCategory().equals(ProductCategory.SOFT_DRINK)) {
-                        errandsFiltered.add(errand);
+                        isReadyForAdd = true;
                     }
                 }
 
             }
+            if (isReadyForAdd) {errandsFiltered.add(errand);}
+
+            isReadyForAdd = false;
         }
 
         return errandsFiltered;

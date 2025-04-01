@@ -36,7 +36,7 @@
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">vistodi.bs@gmail.com</a></i>
                 <i class="bi bi-phone d-flex align-items-center ms-4"><span>+359 888 88 88 88</span></i>
             </div>
         </div>
@@ -89,7 +89,8 @@
                     <p data-aos="fade-up" data-aos-delay="200"></p>
                     <p data-aos="fade-up" data-aos-delay="200" style="font-size: 18px">А и можеш да си го представиш с един бърз поглед към менюто, с което сме наистина горди!</p>
                     <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <a th:href="@{/home}" class="cta-btn">Продължи</a>
+                        <a th:if="${!session.isEmpty()}" th:href="@{/home}" class="cta-btn">Продължи</a>
+                        <a th:if="${session.isEmpty()}" th:href="@{/login}" class="cta-btn">Продължи</a>
                     </div>
                 </div>
             </div>
