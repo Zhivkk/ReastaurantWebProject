@@ -17,7 +17,7 @@ Main functionalities:
 5. Admin - redirects to a page with the main administrative functionalities - access to read and change user profiles, prepare reports, read and respond to messages from customers, manage reservations made.
 
 2 separate microservices have been developed, respectively for sending e-mail and for organizing activities related to table reservations in the restaurant.
-1. The microservice for sending e-mail automatically sends a message to the user after registration, as well as when the products ordered by him are submitted for delivery. The user can also send a special message that is read by the administrator.
-2. The microservice for organizing reservations accepts reservation orders, checks whether there are free tables depending on the specified number of guests and reserves a table for the guests. The information is submitted to the administrator of the main application, who monitors that the guests are properly seated. The microservice automatically deletes all reservations made older than one month. After a successful reservation, it sends an e-mail to the user via the first microservice.
+1. The microservice for sending e-mail automatically sends a message to the user after registration. The user can also send a special message that is read by the administrator.
+2. The microservice for organizing reservations accepts reservation orders, checks whether there are free tables depending on the specified number of guests and reserves a table for the guests. The information is submitted to the administrator of the main application, who monitors that the guests are properly seated. The microservice automatically deletes all reservations made older than one month.
 
 The application was developed using STATIC TEMPLATE: https://bootstrapmade.com/demo/Restaurantly/; as well as a convertor to json: https://csvjson.com/csv2json
