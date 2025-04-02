@@ -18,6 +18,6 @@ Main functionalities:
 
 2 separate microservices have been developed, respectively for sending e-mail and for organizing activities related to table reservations in the restaurant.
 1. The microservice for sending e-mail automatically sends a message to the user after registration. The user can also send a special message that is read by the administrator.
-2. The microservice for organizing reservations accepts reservation orders, checks whether there are free tables depending on the specified number of guests and reserves a table for the guests. The information is submitted to the administrator of the main application, who monitors that the guests are properly seated. The microservice automatically deletes all reservations made older than one month. After a successful reservation, it sends an e-mail to the user via the first microservice.
+2. The microservice for organizing reservations accepts reservation orders, checks whether there are free tables depending on the specified number of guests and reserves a table for the guests. The information is submitted to the administrator of the main application, who monitors that the guests are properly seated. The microservice automatically deletes all reservations made older than one month.
 
 The application was developed using STATIC TEMPLATE: https://bootstrapmade.com/demo/Restaurantly/; as well as a convertor to json: https://csvjson.com/csv2json
